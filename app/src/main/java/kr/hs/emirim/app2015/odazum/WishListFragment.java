@@ -36,6 +36,7 @@ public class WishListFragment extends Fragment  {
     Post mPost;
     List<Post> mPosts;
     WishListAdapter adapter;
+    String mWishItemList;
 
     public WishListFragment() {
     }
@@ -46,10 +47,6 @@ public class WishListFragment extends Fragment  {
 
         View view = inflater.inflate(R.layout.fragment_wishlist, container, false);
 
-        //------------------------------------------------------------
-        SharedPreferences prefs = getActivity().getSharedPreferences("odazum", Context.MODE_PRIVATE);
-        //m_user_id = prefs.getInt("user_id", 0);
-        //m_isGrand = prefs.getBoolean("isGrand", false);
 
         /**
          * Gson 컨버터 이용
@@ -91,6 +88,7 @@ public class WishListFragment extends Fragment  {
     @Override
     public void onResume() {
         super.onResume();
+
         getData();
     }
 
@@ -98,22 +96,28 @@ public class WishListFragment extends Fragment  {
         /**
          * 통신 콜백 메서드 Callback<List<Address>> callback
          */
-        Log.i(TAG, "위시리스트 가져오기");
-        restAdapter.create(OdazumService.class).posts(new Callback<List<Post>>() {
-            @Override
-            public void success(List<Post> posts, Response response) {
-                mPosts = posts;
-                adapter = new WishListAdapter(getActivity().getApplicationContext(), posts);
-                listView.setAdapter(adapter);
-                for (int i = 0; i < posts.size(); i++) {
-                    Log.d(TAG, "데이터는 " + posts.get(i).getTitle());
-                }
-            }
+        //------------------------------------------------------------
+        SharedPreferences prefs = getActivity().getSharedPreferences("odazum", Context.MODE_PRIVATE);
+        mWishItemList = prefs.getString("wish_item_list", "");
 
-            @Override
-            public void failure(RetrofitError error) {
-                Log.i(TAG, "post가져오기 에러 ");
-            }
+
+        Log.i(TAG, "위시리스트 가져오기");
+        restAdapter.create(OdazumService.class)
+                .wishposts(mWishItemList, new Callback<List<Post>>() {
+                    @Override
+                    public void success(List<Post> posts, Response response) {
+                        mPosts = posts;
+                        adapter = new WishListAdapter(getActivity().getApplicationContext(), posts);
+                        listView.setAdapter(adapter);
+                        for (int i = 0; i < posts.size(); i++) {
+                            Log.d(TAG, "데이터는 " + posts.get(i).getTitle());
+                        }
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Log.i(TAG, "post가져오기 에러 ");
+                    }
         });
     }
 
