@@ -497,9 +497,14 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.but_main:
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container,new PlaceholderFragment())
+                        .commit();
+                onSectionAttached(0);
+                /*
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                startActivity(intent);*/
                 break;
         }
     }

@@ -8,12 +8,12 @@ import lombok.Setter;
  */
 public class Tag {
     @Getter @Setter
-    int id;
+    int no;
     @Getter @Setter
-    String word;
+    String name;
     public Tag() {}
-    public Tag(int id, String word) {
-        this.id = id;
-        this.word = word;
+    public Tag(int no, String name) {
+        this.no = no;
+        this.name = name;
     }
 }

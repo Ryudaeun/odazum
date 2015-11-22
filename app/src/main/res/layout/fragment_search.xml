@@ -67,7 +67,7 @@
                     android:layout_width="560dp"
                     android:layout_height="match_parent">
                     <ImageButton
-                        android:id="@+id/but_age_one"
+                        android:id="@+id/but_age_1"
                         android:layout_gravity="center_vertical"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
@@ -76,7 +76,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"/>
                     <ImageButton
-                        android:id="@+id/but_age_two"
+                        android:id="@+id/but_age_2"
                         android:layout_marginLeft="100dp"
                         android:layout_gravity="center_vertical"
                         android:layout_width="30dp"
@@ -86,7 +86,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"/>
                     <ImageButton
-                        android:id="@+id/but_age_three"
+                        android:id="@+id/but_age_3"
                         android:layout_marginLeft="205dp"
                         android:layout_gravity="center_vertical"
                         android:layout_width="30dp"
@@ -96,7 +96,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"/>
                     <ImageButton
-                        android:id="@+id/but_age_four"
+                        android:id="@+id/but_age_4"
                         android:layout_marginLeft="310dp"
                         android:layout_gravity="center_vertical"
                         android:layout_width="30dp"
@@ -106,7 +106,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"/>
                     <ImageButton
-                        android:id="@+id/but_age_five"
+                        android:id="@+id/but_age_5"
                         android:layout_marginLeft="420dp"
                         android:layout_gravity="center_vertical"
                         android:layout_width="30dp"
@@ -116,7 +116,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"/>
                     <ImageButton
-                        android:id="@+id/but_age_six"
+                        android:id="@+id/but_age_6"
                         android:layout_marginLeft="520dp"
                         android:layout_gravity="center_vertical"
                         android:layout_width="30dp"
@@ -274,14 +274,14 @@
                 android:orientation="horizontal"
                 android:gravity="center">
                 <Button
-                    android:id="@+id/tag_one"
+                    android:id="@+id/tag_1"
                     android:layout_width="160dp"
                     android:layout_height="70dp"
                     android:background="@drawable/recommend"
                     android:textColor="#787878"
                     android:textSize="20sp"/>
                 <Button
-                    android:id="@+id/tag_two"
+                    android:id="@+id/tag_2"
                     android:layout_marginLeft="10dp"
                     android:layout_width="160dp"
                     android:layout_height="70dp"
@@ -289,7 +289,7 @@
                     android:textColor="#787878"
                     android:textSize="20sp"/>
                 <Button
-                    android:id="@+id/tag_three"
+                    android:id="@+id/tag_3"
                     android:layout_marginLeft="10dp"
                     android:layout_width="160dp"
                     android:layout_height="70dp"
@@ -304,14 +304,14 @@
                 android:orientation="horizontal"
                 android:gravity="center">
                 <Button
-                    android:id="@+id/tag_four"
+                    android:id="@+id/tag_4"
                     android:layout_width="160dp"
                     android:layout_height="70dp"
                     android:background="@drawable/recommend"
                     android:textColor="#787878"
                     android:textSize="20sp"/>
                 <Button
-                    android:id="@+id/tag_five"
+                    android:id="@+id/tag_5"
                     android:layout_marginLeft="10dp"
                     android:layout_width="160dp"
                     android:layout_height="70dp"
@@ -320,7 +320,7 @@
                     android:textSize="20sp"/>
 
                 <Button
-                    android:id="@+id/tag_six"
+                    android:id="@+id/tag_6"
                     android:layout_marginLeft="10dp"
                     android:layout_width="160dp"
                     android:layout_height="70dp"
@@ -348,7 +348,7 @@
             android:layout_height="90dp"
             android:background="@drawable/result"
             android:text="검색하기"
-            android:textSize="2sp"
+            android:textSize="25sp"
             android:textColor="#ffffff"
             />
     </LinearLayout>

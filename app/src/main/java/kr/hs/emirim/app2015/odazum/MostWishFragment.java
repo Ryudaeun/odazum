@@ -31,7 +31,7 @@ import retrofit.converter.GsonConverter;
  */
 public class MostWishFragment extends Fragment {
 
-    private static final String TAG = "¿À´ÙÁÖ¿ò:PostListF";
+    private static final String TAG = "ì˜¤ë‹¤ì£¼ì›€:PostListF";
     RestAdapter restAdapter;
     GridView gridView;
     int mPosition;
@@ -54,7 +54,7 @@ public class MostWishFragment extends Fragment {
         //m_isGrand = prefs.getBoolean("isGrand", false);
 
         /**
-         * Gson ÄÁ¹öÅÍ ÀÌ¿ë
+         * Gson ì»¨ë²„í„° ì´ìš©
          */
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -62,16 +62,16 @@ public class MostWishFragment extends Fragment {
                 .create();
 
         /**
-         * ·¹Æ®·ÎÇÍ ¼³Á¤
+         * ë ˆíŠ¸ë¡œí• ì„¤ì •
          */
         restAdapter = new RestAdapter.Builder()
-                //·Î±× ·¹º§ ¼³Á¤
+                //ë¡œê·¸ ë ˆë²¨ ì„¤ì •
                 .setLogLevel(RestAdapter.LogLevel.FULL)
-                        //BASE_URL ¼³Á¤
+                        //BASE_URL ì„¤ì •
                 .setEndpoint(OdazumService.API_URL)
-                        //OkHttpClient ÀÌ¿ë
+                        //OkHttpClient ì´ìš©
                 .setClient(new OkClient(new OkHttpClient()))
-                        //Gson Converter ¼³Á¤
+                        //Gson Converter ì„¤ì •
                 .setConverter(new GsonConverter(gson))
                 .build();
         //------------------------------------------------------------
@@ -98,15 +98,15 @@ public class MostWishFragment extends Fragment {
 
     private void getData() {
         /**
-         * Åë½Å Äİ¹é ¸Ş¼­µå Callback<List<Address>> callback
+         * í†µì‹  ì½œë°± ë©”ì„œë“œ Callback<List<Address>> callback
          */
-        Log.i(TAG, "ÀÎ±â¼ø 20 °¡Á®¿À±â");
+        Log.i(TAG, "ì¸ê¸°ìˆœ 20 ê°€ì ¸ì˜¤ê¸°");
         restAdapter.create(OdazumService.class).mostwish(new Callback<List<Post>>() {
             @Override
             public void success(List<Post> posts, Response response) {
                 mPosts = posts;
                 /*
-                // TODO ÀÓ½Ã·Î ³ÖÀº ÄÚµå
+                // TODO ì„ì‹œë¡œ ë„£ì€ ì½”ë“œ
                 for (int i = 0; i < 29; i++) {
                     mPosts.add(posts.get(0));
                 }
@@ -114,30 +114,30 @@ public class MostWishFragment extends Fragment {
                 adapter = new PostListAdapter(getActivity().getApplicationContext(), posts);
                 gridView.setAdapter(adapter);
                 for (int i = 0; i < posts.size(); i++) {
-                    Log.d(TAG, "µ¥ÀÌÅÍ´Â " + posts.get(i).getTitle());
+                    Log.d(TAG, "ë°ì´í„°ëŠ” " + posts.get(i).getTitle());
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Log.i(TAG, "post°¡Á®¿À±â ¿¡·¯ ");
+                Log.i(TAG, "postê°€ì ¸ì˜¤ê¸° ì—ëŸ¬ ");
             }
         });
     }
 
     /*
     private void addDate(Post post) {
-        Log.d(TAG, "Ãß°¡µÇ´Â °Ô½Ã±Û" + post.getTitle());
+        Log.d(TAG, "ì¶”ê°€ë˜ëŠ” ê²Œì‹œê¸€" + post.getTitle());
         restAdapter.create(OdazumService.class).
             createPost(id, post.getTitle(), post.getDate(), post.getImage(), post.getClick(), post.getWish(), new Callback<Post>() {
                 public void success(Post post, Response response) {
-                    Log.d(TAG, "Post Ãß°¡ÇÏ±â");
+                    Log.d(TAG, "Post ì¶”ê°€í•˜ê¸°");
                     Log.d(TAG, post.toString());
                     getData();
                 }
 
                 public void failure(RetrofitError error) {
-                    Log.d(TAG, "Post Ãß°¡ÇÏ±â ¿¡·¯!" + error.getMessage());
+                    Log.d(TAG, "Post ì¶”ê°€í•˜ê¸° ì—ëŸ¬!" + error.getMessage());
                 }
             });
     }*/

@@ -1,9 +1,12 @@
 package kr.hs.emirim.app2015.odazum;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -17,9 +20,20 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
+
+                SharedPreferences prefs = getSharedPreferences("odazum", MODE_PRIVATE);
+                boolean mIsLogined = prefs.getBoolean("islogined", false);
+
+                Intent intent;
+                if (mIsLogined){
+                    intent = new Intent( getApplicationContext(),MainActivity.class);
+
+                }else {
+                    intent = new Intent( getApplicationContext(), LoginActivity.class);
+                }
                 startActivity(intent);
                 finish();
+
             }
         }, 2000);
     }

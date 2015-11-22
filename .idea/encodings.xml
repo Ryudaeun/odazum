@@ -3,10 +3,9 @@
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/app/build.gradle" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/AbsListViewScrollDetector.java" charset="EUC-KR" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/ClickActivity.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/CustomAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/LoginActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/MostWishFragment.java" charset="EUC-KR" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/MostWishFragment.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/MyApplication.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/NavigationDrawFragment.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/NavigationDrawerCallbacks.java" charset="EUC-KR" />
@@ -14,6 +13,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/ScrollDirectionListener.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/ScrollTabHolder.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/ScrollTabHolderFragment.java" charset="EUC-KR" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/SearchPostListFragment.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/SettingActivity.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/SlidingTabLayout.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/SlidingTabStrip.java" charset="EUC-KR" />
@@ -54,9 +54,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/pink_wallet.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/selected_navdrawer_item_background.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/session_tag_chip.xml" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_click.xml" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_detailview.xml" charset="EUC-KR" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_hottest.xml" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_social.xml" charset="EUC-KR" />

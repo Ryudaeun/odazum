@@ -1,6 +1,8 @@
 package kr.hs.emirim.app2015.odazum;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,15 +13,34 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.internal.bind.DateTypeAdapter;
+import com.squareup.okhttp.OkHttpClient;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.OkClient;
+import retrofit.client.Response;
+import retrofit.converter.GsonConverter;
 
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class SearchFragment extends Fragment {
-
-    public SearchFragment() {
-    }
+    RestAdapter restAdapter;
+    int mPosition;
+    Tag mTag;
+    List<Tag> mTags;
+    List<Button> mButtonTags = new ArrayList<Button>();
 
     Button woman;
     Button man;
@@ -33,12 +54,12 @@ public class SearchFragment extends Fragment {
     ImageButton age5;
     ImageButton age6;
 
-    Button tag1;
-    Button tag2;
-    Button tag3;
-    Button tag4;
-    Button tag5;
-    Button tag6;
+//    Button tag1;
+//    Button tag2;
+//    Button tag3;
+//    Button tag4;
+//    Button tag5;
+//    Button tag6;
 
     EditText text_price;
 
@@ -48,12 +69,16 @@ public class SearchFragment extends Fragment {
     int order_by = 0;
     int age = 0;
     int price = 0;
+
     String tag[] = new String[6];
 
     int i = 0;
 
     String sel_text = "#ffffff";
     String desel_text = "#787878";
+
+    public SearchFragment() {
+    }
 
     /*public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +87,34 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        Intent intent = getActivity().getIntent();
+
+        //------------------------------------------------------------
+        SharedPreferences prefs = getActivity().getSharedPreferences("odazum", Context.MODE_PRIVATE);
+        //m_user_id = prefs.getInt("user_id", 0);
+        //m_isGrand = prefs.getBoolean("isGrand", false);
+
+        /**
+         * Gson 컨버터 이용
+         */
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .registerTypeAdapter(java.sql.Date.class, new DateTypeAdapter())
+                .create();
+
+        /**
+         * 레트로핏 설정
+         */
+        restAdapter = new RestAdapter.Builder()
+                //로그 레벨 설정
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                        //BASE_URL 설정
+                .setEndpoint(OdazumService.API_URL)
+                        //OkHttpClient 이용
+                .setClient(new OkClient(new OkHttpClient()))
+                        //Gson Converter 설정
+                .setConverter(new GsonConverter(gson))
+                .build();
+        //-----------------------------------------------------------
 
         man = (Button)view.findViewById(R.id.but_man);
         gender_set(man);
@@ -75,43 +127,49 @@ public class SearchFragment extends Fragment {
 
         text_price = (EditText)view.findViewById(R.id.text_price);
 
-        age1 = (ImageButton)view.findViewById(R.id.but_age_one);
+        age1 = (ImageButton)view.findViewById(R.id.but_age_1);
         age1.setAlpha(255);
         age_set(age1);
-        age2 = (ImageButton)view.findViewById(R.id.but_age_two);
+        age2 = (ImageButton)view.findViewById(R.id.but_age_2);
         age2.setAlpha(0);
         age_set(age2);
-        age3 = (ImageButton)view.findViewById(R.id.but_age_three);
+        age3 = (ImageButton)view.findViewById(R.id.but_age_3);
         age3.setAlpha(0);
         age_set(age3);
-        age4 = (ImageButton)view.findViewById(R.id.but_age_four);
+        age4 = (ImageButton)view.findViewById(R.id.but_age_4);
         age4.setAlpha(0);
         age_set(age4);
-        age5 = (ImageButton)view.findViewById(R.id.but_age_five);
+        age5 = (ImageButton)view.findViewById(R.id.but_age_5);
         age5.setAlpha(0);
         age_set(age5);
-        age6 = (ImageButton)view.findViewById(R.id.but_age_six);
+        age6 = (ImageButton)view.findViewById(R.id.but_age_6);
         age6.setAlpha(0);
         age_set(age6);
 
-        tag1 = (Button)view.findViewById(R.id.tag_one);
-        tag1.setText("#발렌타인");
-        tag_set(tag1);
-        tag2 = (Button)view.findViewById(R.id.tag_two);
-        tag2.setText("#화이트데이");
-        tag_set(tag2);
-        tag3 = (Button)view.findViewById(R.id.tag_three);
-        tag3.setText("#크리스마스");
-        tag_set(tag3);
-        tag4 = (Button)view.findViewById(R.id.tag_four);
-        tag4.setText("#졸업");
-        tag_set(tag4);
-        tag5 = (Button)view.findViewById(R.id.tag_five);
-        tag5.setText("#성년의날");
-        tag_set(tag5);
-        tag6 = (Button)view.findViewById(R.id.tag_six);
-        tag6.setText("#입학");
-        tag_set(tag6);
+        for(int i = 0; i <6; i++) {
+            mButtonTags.add((Button) view.findViewById(R.id.tag_1 + i));
+            //mButtonTags.get(i).setText("불러오는 중..");
+            tag_set((Button) mButtonTags.get(i));
+        }
+//
+//        tag1 = (Button)view.findViewById(R.id.tag_one);
+//        tag1.setText("#발렌타인");
+//        tag_set(tag1);
+//        tag2 = (Button)view.findViewById(R.id.tag_two);
+//        tag2.setText("#화이트데이");
+//        tag_set(tag2);
+//        tag3 = (Button)view.findViewById(R.id.tag_three);
+//        tag3.setText("#크리스마스");
+//        tag_set(tag3);
+//        tag4 = (Button)view.findViewById(R.id.tag_four);
+//        tag4.setText("#졸업");
+//        tag_set(tag4);
+//        tag5 = (Button)view.findViewById(R.id.tag_five);
+//        tag5.setText("#성년의날");
+//        tag_set(tag5);
+//        tag6 = (Button)view.findViewById(R.id.tag_six);
+//        tag6.setText("#입학");
+//        tag_set(tag6);
 
         for(int i=0; i<6; i++) {
             tag[i] = null;
@@ -121,9 +179,17 @@ public class SearchFragment extends Fragment {
         result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                price = Integer.parseInt(text_price.getText().toString());
+                SharedPreferences prefs = getActivity().getSharedPreferences("odazum", getActivity().MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("gender", gender);
+                editor.putInt("age", age*10);
+                editor.putInt("orderby", order_by);
+                editor.putInt("max_price", Integer.parseInt(text_price.getText().toString()));
+                String tags = tag.toString();
+                editor.putString("tags", tags);
+                editor.commit();
                 getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new PostListFragment())
+                    .replace(R.id.container, new SearchPostListFragment())
                     .commit();
             }
         });
@@ -278,128 +344,67 @@ public class SearchFragment extends Fragment {
         for(int i = 0; i < 6; i++) {
             flag[i] = false;
         }
-        if(but_tag == tag1) {
-            tag1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(flag[0]) {
-                        if(tag[0] != null && tag[0].equals(tag1.getText().toString()))
-                            tag[0] = null;
-                        tag1.setBackgroundDrawable(getResources().getDrawable(R.drawable.recommend));
-                        tag1.setTextColor(Color.parseColor(desel_text));
-                        flag[0] = false;
-                    }
-                    else {
-                        tag[0] = tag1.getText().toString();
-                        tag1.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
-                        tag1.setTextColor(Color.parseColor(sel_text));
-                        flag[0] = true;
 
-                    }
+        int button_number = but_tag.getId()  - R.id.tag_1;
+        mButtonTags.get(button_number).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int button_number = v.getId()  - R.id.tag_1;
+                Button tag_but = mButtonTags.get(button_number);
+                if(flag[button_number]) {
+                    if(tag[button_number] != null && tag[button_number].equals(tag_but.getText().toString()))
+                        tag[button_number] = null;
+                    tag_but.setBackgroundDrawable(getResources().getDrawable(R.drawable.recommend));
+                    tag_but.setTextColor(Color.parseColor(desel_text));
+                    flag[button_number] = false;
                 }
-            });
-        }
-        else if(but_tag == tag2) {
-            tag2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(flag[1]) {
-                        if(tag[1] != null && tag[1].equals(tag2.getText().toString()))
-                            tag[1] = null;
-                        tag2.setBackgroundDrawable(getResources().getDrawable(R.drawable.recommend));
-                        tag2.setTextColor(Color.parseColor(desel_text));
-                        flag[1] = false;
-                    }
-                    else {
-                        tag[1] = tag2.getText().toString();
-                        tag2.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
-                        tag2.setTextColor(Color.parseColor(sel_text));
-                        flag[1] = true;
-                    }
+                else {
+                    tag[button_number] = tag_but.getText().toString();
+                    tag_but.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
+                    tag_but.setTextColor(Color.parseColor(sel_text));
+                    flag[button_number] = true;
+
                 }
-            });
-        }
-        else if(but_tag == tag3) {
-            tag3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(flag[2]) {
-                        if(tag[2] != null && tag[2].equals(tag3.getText().toString()))
-                            tag[2] = null;
-                        tag3.setBackgroundDrawable(getResources().getDrawable(R.drawable.recommend));
-                        tag3.setTextColor(Color.parseColor(desel_text));
-                        flag[2] = false;
-                    }
-                    else {
-                        tag[2] = tag3.getText().toString();
-                        tag3.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
-                        tag3.setTextColor(Color.parseColor(sel_text));
-                        flag[2] = true;
-                    }
-                }
-            });
-        }
-        else if(but_tag == tag4) {
-            tag4.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(flag[3]) {
-                        if(tag[3] != null && tag[3].equals(tag4.getText().toString()))
-                            tag[3]= null;
-                        tag4.setBackgroundDrawable(getResources().getDrawable(R.drawable.recommend));
-                        tag4.setTextColor(Color.parseColor(desel_text));
-                        flag[3] = false;
-                    }
-                    else {
-                        tag[3] = tag4.getText().toString();
-                        tag4.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
-                        tag4.setTextColor(Color.parseColor(sel_text));
-                        flag[3] = true;
-                    }
-                }
-            });
-        }
-        else if(but_tag == tag5) {
-            tag5.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(flag[4]) {
-                        if (tag[4] != null && tag[4].equals(tag5.getText().toString()))
-                            tag[4] = null;
-                        tag5.setBackgroundDrawable(getResources().getDrawable(R.drawable.recommend));
-                        tag5.setTextColor(Color.parseColor(desel_text));
-                        flag[4] = false;
-                    }
-                    else {
-                        tag[4] = tag5.getText().toString();
-                        tag5.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
-                        tag5.setTextColor(Color.parseColor(sel_text));
-                        flag[4] = true;
-                    }
-                }
-            });
-        }
-        else if(but_tag == tag6) {
-            tag6.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(flag[5]) {
-                        if(tag[5] != null && tag[5].equals(tag6.getText().toString()))
-                            tag[5] = null;
-                        tag6.setBackgroundDrawable(getResources().getDrawable(R.drawable.recommend));
-                        tag6.setTextColor(Color.parseColor(desel_text));
-                        flag[5] = false;
-                    }
-                    else {
-                        tag[5] = tag6.getText().toString();
-                        tag6.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
-                        tag6.setTextColor(Color.parseColor(sel_text));
-                        flag[5] = true;
-                    }
-                }
-            });
-        }
+            }
+        });
+
+
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getTags();
+    }
+
+    private void getTags() {
+        /**
+         * 통신 콜백 메서드 Callback<List<Address>> callback
+         */
+        Log.i(TAG, "위시리스트 가져오기");
+
+
+        restAdapter.create(OdazumService.class).randomtags( new Callback<List<Tag>>() {
+            @Override
+            public void success(List<Tag> tags, Response response) {
+                mTags = tags;
+
+                for (int i = 0; i < tags.size(); i++) {
+                    Log.d(TAG, "데이터는 " + tags.get(i).getName());
+                }
+                for(int i = 0; i < tags.size(); i++){
+                    mButtonTags.get(i).setText(tags.get(i).getName());
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.i(TAG, "product 가져오기 에러 ");
+            }
+        });
+    }
+
+
 }
 
 

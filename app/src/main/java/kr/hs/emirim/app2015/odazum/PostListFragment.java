@@ -1,6 +1,7 @@
 package kr.hs.emirim.app2015.odazum;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -35,6 +36,7 @@ public class PostListFragment extends Fragment {
     RestAdapter restAdapter;
     GridView gridView;
     int mPosition;
+    int mPostID;
     Post mPost;
     List<Post> mPosts;
     PostListAdapter adapter;
@@ -50,8 +52,7 @@ public class PostListFragment extends Fragment {
 
         //------------------------------------------------------------
         SharedPreferences prefs = getActivity().getSharedPreferences("odazum", Context.MODE_PRIVATE);
-        //m_user_id = prefs.getInt("user_id", 0);
-        //m_isGrand = prefs.getBoolean("isGrand", false);
+        mPostID = prefs.getInt("pid", 0);
 
         /**
          * Gson ??? ??
@@ -82,8 +83,8 @@ public class PostListFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                // change fragment
+                Intent intent = new Intent(getActivity(), ItemDetail.class);
+                startActivity(intent);
             }
         });
 

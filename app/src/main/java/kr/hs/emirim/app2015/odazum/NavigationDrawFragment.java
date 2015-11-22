@@ -1,9 +1,11 @@
 package kr.hs.emirim.app2015.odazum;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -111,6 +113,15 @@ public class NavigationDrawFragment extends Fragment {
                 R.layout.google_io_drawer, container, false);
 
         mDrawerItemsListContainer = (ViewGroup) mRootView.findViewById(R.id.navdrawer_items_list);
+
+        TextView tvname = (TextView) mRootView.findViewById(R.id.profile_name_text);
+        TextView tvbirth = (TextView) mRootView.findViewById(R.id.profile_birth);
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("odazum", getActivity().MODE_PRIVATE);
+        String name = prefs.getString("name", "무명씨");
+        String birthday = prefs.getString("birthday", "호랑이 담배먹던 날");
+        tvname.setText(name);
+        tvbirth.setText(birthday);
 
 
         createNavDrawerItems();
@@ -265,13 +276,13 @@ public class NavigationDrawFragment extends Fragment {
         ImageView iconView = (ImageView) view.findViewById(R.id.icon);
         TextView titleView = (TextView) view.findViewById(R.id.title);
 
-        if (selected) {
-            view.setBackgroundResource(R.drawable.selected_navdrawer_item_background);
-        } else {
-            if(MyApplication.isLollipop()) {
-                view.setBackgroundResource(R.drawable.navdrawer_item_background);
-            }
-        }
+//        if (selected) {
+//            view.setBackgroundResource(R.drawable.selected_navdrawer_item_background);
+//        } else {
+//            if(MyApplication.isLollipop()) {
+//                view.setBackgroundResource(R.drawable.navdrawer_item_background);
+//            }
+//        }
         // configure its appearance according to whether or not it's selected
         titleView.setTextColor(selected ?
                 getResources().getColor(R.color.navdrawer_text_color_selected) :

@@ -2,8 +2,10 @@ package kr.hs.emirim.app2015.odazum;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -13,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -71,9 +74,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        //TODO: 값이 입력되어 있는지 체크하는 코드
+
+        SharedPreferences prefs = getSharedPreferences("odazum", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("name", editName.getText().toString());
+        editor.putString("birthday", but_birth.getText().toString());
+        editor.putBoolean("islogined", true);
+
+        editor.commit();
+
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
         Log.d(TAG, "login 성공");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
     }
 }

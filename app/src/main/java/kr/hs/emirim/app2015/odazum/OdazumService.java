@@ -69,9 +69,9 @@ public interface OdazumService {
             Callback<List<Post>> callback
     );
 
-    @GET("/items/")
-    void getsearchtags(
-            Callback<List<Post>> callback
+    @GET("/randomtags/")
+    void randomtags(
+            Callback<List<Tag>> callback
     );
 
     @Multipart
@@ -79,7 +79,7 @@ public interface OdazumService {
     void searchposts(
             @Part("gender") int gender,
             @Part("age") int age,
-            @Part("tag") String tag,
+            @Part("tags") String tags,
             @Part("max_price") int max_price,
             @Part("orderby") int orderby,
             Callback<List<Post>> callback
