@@ -31,7 +31,7 @@ import retrofit.converter.GsonConverter;
  */
 public class PostListFragment extends Fragment {
 
-    private static final String TAG = "오다주움:PostListF";
+    private static final String TAG = "????:PostListF";
     RestAdapter restAdapter;
     ListView listView;
     int mPosition;
@@ -54,7 +54,7 @@ public class PostListFragment extends Fragment {
         //m_isGrand = prefs.getBoolean("isGrand", false);
 
         /**
-         * Gson 컨버터 이용
+         * Gson ??? ??
          */
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -62,16 +62,16 @@ public class PostListFragment extends Fragment {
                 .create();
 
         /**
-         * 레트로핏 설정
+         * ???? ??
          */
         restAdapter = new RestAdapter.Builder()
-                //로그 레벨 설정
+                //?? ?? ??
                 .setLogLevel(RestAdapter.LogLevel.FULL)
-                        //BASE_URL 설정
+                        //BASE_URL ??
                 .setEndpoint(OdazumService.API_URL)
-                        //OkHttpClient 이용
+                        //OkHttpClient ??
                 .setClient(new OkClient(new OkHttpClient()))
-                        //Gson Converter 설정
+                        //Gson Converter ??
                 .setConverter(new GsonConverter(gson))
                 .build();
         //------------------------------------------------------------
@@ -98,44 +98,44 @@ public class PostListFragment extends Fragment {
 
     private void getData() {
         /**
-         * 통신 콜백 메서드 Callback<List<Address>> callback
+         * ?? ?? ??? Callback<List<Address>> callback
          */
-        Log.i(TAG, "위시리스트 가져오기");
+        Log.i(TAG, "????? ????");
         restAdapter.create(OdazumService.class).posts(new Callback<List<Post>>() {
             @Override
             public void success(List<Post> posts, Response response) {
                 mPosts = posts;
-                // TODO 임시로 넣은 코드
+                // TODO ??? ?? ??
                 for (int i = 0; i < 30; i++) {
                     mPosts.add(posts.get(0));
                 }
                 adapter = new WishListAdapter(getActivity().getApplicationContext(), posts);
                 listView.setAdapter(adapter);
                 for (int i = 0; i < posts.size(); i++) {
-                    Log.d(TAG, "데이터는 " + posts.get(i).getTitle());
+                    Log.d(TAG, "???? " + posts.get(i).getTitle());
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Log.i(TAG, "post가져오기 에러 ");
+                Log.i(TAG, "post???? ?? ");
             }
         });
     }
 
     /*
     private void addDate(Post post) {
-        Log.d(TAG, "추가되는 게시글" + post.getTitle());
+        Log.d(TAG, "???? ???" + post.getTitle());
         restAdapter.create(OdazumService.class).
             createPost(id, post.getTitle(), post.getDate(), post.getImage(), post.getClick(), post.getWish(), new Callback<Post>() {
                 public void success(Post post, Response response) {
-                    Log.d(TAG, "Post 추가하기");
+                    Log.d(TAG, "Post ????");
                     Log.d(TAG, post.toString());
                     getData();
                 }
 
                 public void failure(RetrofitError error) {
-                    Log.d(TAG, "Post 추가하기 에러!" + error.getMessage());
+                    Log.d(TAG, "Post ???? ??!" + error.getMessage());
                 }
             });
     }*/

@@ -45,6 +45,8 @@ public class WishListFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        MainActivity.mLastMenu = MainActivity.WISH;
+
         View view = inflater.inflate(R.layout.fragment_wishlist, container, false);
 
 
@@ -98,7 +100,7 @@ public class WishListFragment extends Fragment  {
          */
         //------------------------------------------------------------
         SharedPreferences prefs = getActivity().getSharedPreferences("odazum", Context.MODE_PRIVATE);
-        mWishItemList = prefs.getString("wish_item_list", "");
+        mWishItemList = prefs.getString("wish_item_list", "1,2");
 
 
         Log.i(TAG, "위시리스트 가져오기");

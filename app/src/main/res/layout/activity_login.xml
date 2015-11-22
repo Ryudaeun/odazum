@@ -1,0 +1,138 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="kr.hs.emirim.app2015.odazum.SearchFragment"
+    android:id="@+id/layout_login">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="350dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/login_logo"
+                    android:paddingTop="40dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
+                        <LinearLayout
+                            android:layout_width="400dp"
+                            android:layout_height="72dp"
+                            android:background="@drawable/login_box"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:weightSum="8"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/login_usericon"/>
+                            <EditText
+                                android:gravity="right"
+                                android:id="@+id/editName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="7"
+                                android:autoText="false"
+                                android:hint="@string/typeyourname"
+                                android:textSize="18sp"
+                                />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:layout_weight="1"
+                        android:gravity="center">
+                        <LinearLayout
+                            android:layout_width="400dp"
+                            android:layout_height="72dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:weightSum="8"
+                            android:orientation="horizontal">
+                            <Button
+                                android:id="@+id/btn1"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/login_box"
+                                android:text="@string/typeyourbirthdaydate"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+                <Button
+                    android:id="@+id/but_join"
+                    android:layout_width="420dp"
+                    android:layout_height="80dp"
+                    android:background="#ba1f24"
+                    android:text="@string/startbutton"
+                    android:textSize="30sp"
+                    android:textColor="#ffffff"
+                    android:clickable="true"
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- As the main content view, the view below consumes the entire
+             space available using match_parent in both dimensions. -->
+
+
+        <!-- android:layout_gravity="start" tells DrawerLayout to treat
+             this as a sliding drawer on the left side for left-to-right
+             languages and on the right side for right-to-left languages.
+             If you're not building against API 17 or higher, use
+             android:layout_gravity="left" instead. -->
+        <!-- The drawer is given a fixed width in dp and extends the full height of
+             the container. -->
+
+</LinearLayout>

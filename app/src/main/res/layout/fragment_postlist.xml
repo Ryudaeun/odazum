@@ -7,16 +7,13 @@
     android:background="#ededed"
     tools:context="kr.hs.emirim.app2015.odazum.PostListFragment">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:text="dkdskdsakfkfdsdskkfd" />
-
     <ListView
         android:id="@+id/myListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:listSelector="#26000000"
-        android:textColor="#000000"></ListView>
+        android:textColor="#000000">
+
+    </ListView>
 
 </LinearLayout>
