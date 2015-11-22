@@ -21,7 +21,7 @@
             android:layout_height="80dp"
             android:background="@drawable/select"
             android:text="@string/man"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="#ffffff"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"/>
@@ -32,7 +32,7 @@
             android:layout_height="80dp"
             android:background="@drawable/right_deselect"
             android:text="@string/woman"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="#787878"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"/>
@@ -40,7 +40,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:src="@drawable/line"/>
 
     <LinearLayout
@@ -64,7 +64,7 @@
                     android:src="@drawable/graph"
                     android:background="#00000000"/>
                 <RelativeLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="560dp"
                     android:layout_height="match_parent">
                     <ImageButton
                         android:id="@+id/but_age_one"
@@ -87,16 +87,6 @@
                         android:scaleType="fitXY"/>
                     <ImageButton
                         android:id="@+id/but_age_three"
-                        android:layout_marginLeft="310dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/scroll_button"
-                        android:background="#00000000"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"/>
-                    <ImageButton
-                        android:id="@+id/but_age_four"
                         android:layout_marginLeft="205dp"
                         android:layout_gravity="center_vertical"
                         android:layout_width="30dp"
@@ -106,8 +96,18 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"/>
                     <ImageButton
+                        android:id="@+id/but_age_four"
+                        android:layout_marginLeft="310dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/scroll_button"
+                        android:background="#00000000"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"/>
+                    <ImageButton
                         android:id="@+id/but_age_five"
-                        android:layout_marginLeft="415dp"
+                        android:layout_marginLeft="420dp"
                         android:layout_gravity="center_vertical"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
@@ -117,7 +117,7 @@
                         android:scaleType="fitXY"/>
                     <ImageButton
                         android:id="@+id/but_age_six"
-                        android:layout_marginLeft="515dp"
+                        android:layout_marginLeft="520dp"
                         android:layout_gravity="center_vertical"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
@@ -134,53 +134,54 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10"
-                    android:textSize="25sp"
-                    android:background="#00000000"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="70dp"
-                    android:text="20"
-                    android:textSize="25sp"
-                    android:background="#00000000"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
-                    android:text="30"
-                    android:textSize="25sp"
-                    android:background="#00000000"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
-                    android:text="40"
-                    android:textSize="25sp"
-                    android:background="#00000000"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
-                    android:text="50"
-                    android:textSize="25sp"
-                    android:background="#00000000"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
-                    android:text="60"
-                    android:textSize="25sp"
-                    android:background="#00000000"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:textSize="25sp"
+                android:background="#00000000"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:text="20"
+                android:textSize="25sp"
+                android:background="#00000000"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:text="30"
+                android:textSize="25sp"
+                android:background="#00000000"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:text="40"
+                android:textSize="25sp"
+                android:background="#00000000"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:text="50"
+                android:textSize="25sp"
+                android:background="#00000000"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:text="60"
+                android:textSize="25sp"
+                android:background="#00000000" />
         </LinearLayout>
+
     </LinearLayout>
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:src="@drawable/line"/>
 
     <LinearLayout
@@ -200,7 +201,7 @@
                 android:layout_height="80dp"
                 android:background="@drawable/left_deselect"
                 android:text="@string/inquiry"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textColor="#787878"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"/>
@@ -210,7 +211,7 @@
                 android:layout_height="80dp"
                 android:background="@drawable/select"
                 android:text="@string/newest"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textColor="#ffffff"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"/>
@@ -237,13 +238,14 @@
                     android:layout_weight="7"
                     android:autoText="false"
                     android:hint="@string/input_price"
-                    android:textSize="25sp"
+                    android:inputType="numberDecimal"
+                    android:textSize="20sp"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="2dp"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:text="@string/won"/>
             </LinearLayout>
         </LinearLayout>
@@ -251,7 +253,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:src="@drawable/line"/>
 
     <LinearLayout
@@ -331,7 +333,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:src="@drawable/line"/>
 
     <LinearLayout
@@ -342,11 +344,11 @@
         android:layout_weight="1">
         <Button
             android:id="@+id/but_result"
-            android:layout_width="350dp"
+            android:layout_width="500dp"
             android:layout_height="90dp"
             android:background="@drawable/result"
             android:text="검색하기"
-            android:textSize="20sp"
+            android:textSize="2sp"
             android:textColor="#ffffff"
             />
     </LinearLayout>

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -167,43 +166,43 @@ public class MainActivity extends AppCompatActivity
                 break;
             case NavigationDrawFragment.NAVDRAWER_ITEM_HOTTEST:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, new HottestActivity())
+                        .replace(R.id.container, new MostWishFragment())
                         .commit();
                 onSectionAttached(4);
                 break;
             case NavigationDrawFragment.NAVDRAWER_ITEM_CLICK:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, new ClickActivity())
+                        .replace(R.id.container, new MostViewFragment())
                         .commit();
                 onSectionAttached(5);
                 break;
             case NavigationDrawFragment.NAVDRAWER_ITEM_FASHION:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, new ClickActivity())
+                        .replace(R.id.container, new ClothesFragment())
                         .commit();
                 onSectionAttached(6);
                 break;
             case NavigationDrawFragment.NAVDRAWER_ITEM_ACC:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, new ClickActivity())
+                        .replace(R.id.container, new GoodsFragment())
                         .commit();
                 onSectionAttached(7);
                 break;
             case NavigationDrawFragment.NAVDRAWER_ITEM_BEAUTY:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, new ClickActivity())
+                        .replace(R.id.container, new BeautyFragment())
                         .commit();
                 onSectionAttached(8);
                 break;
             case NavigationDrawFragment.NAVDRAWER_ITEM_FOOD:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, new ClickActivity())
+                        .replace(R.id.container, new FoodFragment())
                         .commit();
                 onSectionAttached(9);
                 break;
             case NavigationDrawFragment.NAVDRAWER_ITEM_FANCY:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, new ClickActivity())
+                        .replace(R.id.container, new FancyFragment())
                         .commit();
                 onSectionAttached(10);
                 break;
@@ -252,14 +251,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void restoreActionBar() {
-
         actionBar = getSupportActionBar();
         //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

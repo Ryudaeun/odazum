@@ -5,8 +5,8 @@
     <string name="title_section1">위시리스트</string>
     <string name="title_section2">설정</string>
     <string name="title_section3">맞춤검색</string>
-    <string name="title_section4">인기순 Best 10</string>
-    <string name="title_section5">조회수 Best 10</string>
+    <string name="title_section4">인기순 Best 20</string>
+    <string name="title_section5">조회순 Best 20</string>
     <string name="title_section6">패션의류</string>
     <string name="title_section7">잡화</string>
     <string name="title_section8">뷰티</string>
@@ -101,7 +101,7 @@
     <string name="woman">여자</string>
     <string name="inquiry">조회순</string>
     <string name="newest">최신순</string>
-    <string name="input_price">직접 입력</string>
+    <string name="input_price">최대 가격 직접 입력</string>
     <string name="won">원</string>
     <string name="search_all">검색하기</string>
     <string name="title_activity_main2">Main2Activity</string>
@@ -130,7 +130,6 @@
 
     <string name="title_activity_dbhelp">DBHelp</string>
     <string name="title_activity_result">ResultActivity</string>
-    <string name="title_activity_sample_grid_view_adapter">SampleGridViewAdapter</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -140,9 +139,12 @@
     <string name="title_activity_grid_view_adapter">GridViewAdapter</string>
     <string name="title_activity_grid_view_item">GridViewItem</string>
     <string name="title_activity_prefs_fragment">PrefsFragment</string>
-    <string name="typeyourname">이름을 입력해 주세요</string>
-    <string name="typeyourbirthdaydate">생일을 입력해 주세요</string>
+    <string name="typeyourname">이름을 입력하세요</string>
+    <string name="typeyourbirthdaydate">생일을 입력하세요</string>
     <string name="startbutton">시작하기</string>
-    <string name="welcomemessage">내 마음을 때리는 선물~</string>
+    <string name="welcomemessage">내 마음 때리는 선물</string>
+    <string name="inquiry_page">조회순 페이지입니다.</string>
+    <string name="searchbar_hint">검색어를 입력하세요</string>
+    <string name="save_wishlist">보관함에 저장되었습니다.</string>
 
 </resources>

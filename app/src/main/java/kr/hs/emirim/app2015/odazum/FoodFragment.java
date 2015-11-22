@@ -1,19 +1,15 @@
 package kr.hs.emirim.app2015.odazum;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -31,9 +27,9 @@ import retrofit.client.Response;
 import retrofit.converter.GsonConverter;
 
 /**
- * Created by Student on 2015-11-20.
+ * A placeholder fragment containing a simple view.
  */
-public class ItemDetail extends Activity{
+public class FoodFragment extends Fragment {
 
     private static final String TAG = "오다주움:PostListF";
     RestAdapter restAdapter;
@@ -43,48 +39,17 @@ public class ItemDetail extends Activity{
     List<Post> mPosts;
     PostListAdapter adapter;
 
-    public ItemDetail() {
+    public FoodFragment() {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_detail);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        Intent intent = getIntent();
-
-        ViewPager item_pager = (ViewPager)findViewById(R.id.detail_pager);
-        final PagerAdapter pagerAdapter = item_pager.getAdapter();
-        item_pager.setAdapter(pagerAdapter);
-
-//        String title = intent.getExtras().getString("title");
-//        TextView textView = (TextView)findViewById(R.id.post_title);
-//        textView.setText(title);
-
-//        int img = intent.getExtras().getInt("img");
-//        ImageView imageView = (ImageView)findViewById(R.id.imageView);
-//        imageView.setImageResource(img);
-
-        ImageButton imageButton = (ImageButton)findViewById(R.id.like_btn);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ItemDetail.this, R.string.save_wishlist, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        final String str = "핑크지갑";
-
-        ImageButton imageButton1 = (ImageButton)findViewById(R.id.link_btn);
-        imageButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.shopping.naver.com/search/all_search.nhn?query="+str+"&cat_id=&frm=NVSHATC&nlu=true")));
-            }
-        });
+        View view = inflater.inflate(R.layout.fragment_postlist, container, false);
 
         //------------------------------------------------------------
-        SharedPreferences prefs = getSharedPreferences("odazum", Context.MODE_PRIVATE);
+        SharedPreferences prefs = getActivity().getSharedPreferences("odazum", Context.MODE_PRIVATE);
         //m_user_id = prefs.getInt("user_id", 0);
         //m_isGrand = prefs.getBoolean("isGrand", false);
 
@@ -111,7 +76,7 @@ public class ItemDetail extends Activity{
                 .build();
         //------------------------------------------------------------
 
-        gridView = (GridView)findViewById(R.id.myGridView);
+        gridView = (GridView) view.findViewById(R.id.myGridView);
 
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -122,6 +87,7 @@ public class ItemDetail extends Activity{
             }
         });
 
+        return view;
     }
 
     @Override
@@ -134,16 +100,18 @@ public class ItemDetail extends Activity{
         /**
          * 통신 콜백 메서드 Callback<List<Address>> callback
          */
-        Log.i(TAG, "위시리스트 가져오기");
-        restAdapter.create(OdazumService.class).posts(new Callback<List<Post>>() {
+        Log.i(TAG, "인기순 20 가져오기");
+        restAdapter.create(OdazumService.class).foods(new Callback<List<Post>>() {
             @Override
             public void success(List<Post> posts, Response response) {
                 mPosts = posts;
+                /*
                 // TODO 임시로 넣은 코드
                 for (int i = 0; i < 29; i++) {
                     mPosts.add(posts.get(0));
                 }
-                adapter = new PostListAdapter(getApplicationContext(), posts);
+                */
+                adapter = new PostListAdapter(getActivity().getApplicationContext(), posts);
                 gridView.setAdapter(adapter);
                 for (int i = 0; i < posts.size(); i++) {
                     Log.d(TAG, "데이터는 " + posts.get(i).getTitle());
@@ -173,4 +141,5 @@ public class ItemDetail extends Activity{
                 }
             });
     }*/
+
 }

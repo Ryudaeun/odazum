@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.GridView;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -33,11 +33,11 @@ public class PostListFragment extends Fragment {
 
     private static final String TAG = "????:PostListF";
     RestAdapter restAdapter;
-    ListView listView;
+    GridView gridView;
     int mPosition;
     Post mPost;
     List<Post> mPosts;
-    WishListAdapter adapter;
+    PostListAdapter adapter;
 
     public PostListFragment() {
     }
@@ -76,10 +76,10 @@ public class PostListFragment extends Fragment {
                 .build();
         //------------------------------------------------------------
 
-        listView = (ListView) view.findViewById(R.id.myListView);
+        gridView = (GridView) view.findViewById(R.id.myGridView);
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -106,11 +106,11 @@ public class PostListFragment extends Fragment {
             public void success(List<Post> posts, Response response) {
                 mPosts = posts;
                 // TODO ??? ?? ??
-                for (int i = 0; i < 30; i++) {
+                for (int i = 0; i < 29; i++) {
                     mPosts.add(posts.get(0));
                 }
-                adapter = new WishListAdapter(getActivity().getApplicationContext(), posts);
-                listView.setAdapter(adapter);
+                adapter = new PostListAdapter(getActivity().getApplicationContext(), posts);
+                gridView.setAdapter(adapter);
                 for (int i = 0; i < posts.size(); i++) {
                     Log.d(TAG, "???? " + posts.get(i).getTitle());
                 }

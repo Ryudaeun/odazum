@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kr.hs.emirim.app2015.odazum.ItemDetail"
+    tools:context="com.stac.odazum_1127.ItemDetail"
     android:weightSum="10"
     android:orientation="vertical"
     android:background="#ffff"
@@ -21,23 +21,23 @@
 
 
     <!--<ImageView-->
-        <!--android:src="@drawable/pink_wallet"-->
-        <!--android:id="@+id/imageView"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="7"-->
-        <!--/>-->
+    <!--android:src="@drawable/pink_wallet"-->
+    <!--android:id="@+id/imageView"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="7"-->
+    <!--/>-->
 
     <!--<TextView-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="1"-->
-        <!--android:textSize="30dp"-->
-        <!--android:textColor="#ff000000"-->
-        <!--android:textStyle="bold"-->
-        <!--android:id="@+id/post_title"-->
-        <!--android:layout_marginLeft="20sp"-->
-        <!--/>-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:textSize="30dp"-->
+    <!--android:textColor="#ff000000"-->
+    <!--android:textStyle="bold"-->
+    <!--android:id="@+id/post_title"-->
+    <!--android:layout_marginLeft="20sp"-->
+    <!--/>-->
 
     <TextView
         android:layout_width="wrap_content"

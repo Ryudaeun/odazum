@@ -34,5 +34,54 @@ public interface OdazumService {
             Callback<List<Post>> callback
     );
 
+    @GET("/items/mostwish/20")
+    void mostwish(
+            Callback<List<Post>> callback
+    );
 
+    @GET("/items/mostview/20")
+    void mostview(
+            Callback<List<Post>> callback
+    );
+
+    @GET("/fashionclothes/recently")
+    void fashionclothes(
+            Callback<List<Post>> callback
+    );
+
+    @GET("/fashiongoods/recently")
+    void fashiongoods(
+            Callback<List<Post>> callback
+    );
+
+    @GET("/beautygoods/recently")
+    void beautygoods(
+            Callback<List<Post>> callback
+    );
+
+    @GET("/foods/recently")
+    void foods(
+            Callback<List<Post>> callback
+    );
+
+    @GET("/fancygoods/recently")
+    void fancygoods (
+            Callback<List<Post>> callback
+    );
+
+    @GET("/items/")
+    void getsearchtags(
+            Callback<List<Post>> callback
+    );
+
+    @Multipart
+    @POST("/items")
+    void searchposts(
+            @Part("gender") int gender,
+            @Part("age") int age,
+            @Part("tag") String tag,
+            @Part("max_price") int max_price,
+            @Part("orderby") int orderby,
+            Callback<List<Post>> callback
+    );
 }

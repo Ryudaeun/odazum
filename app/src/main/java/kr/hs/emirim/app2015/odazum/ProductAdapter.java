@@ -72,7 +72,6 @@ public class ProductAdapter extends PagerAdapter {
         Glide.with(mContext)
                 .load(mProduct.getImage())
                 .crossFade()
-                .centerCrop()
                 .override(800, 800)
                 .into(img);
 

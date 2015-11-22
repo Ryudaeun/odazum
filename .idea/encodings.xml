@@ -5,12 +5,12 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/AbsListViewScrollDetector.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/ClickActivity.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/CustomAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/HottestActivity.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/LoginActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/MostWishFragment.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/MyApplication.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/NavigationDrawFragment.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/NavigationDrawerCallbacks.java" charset="EUC-KR" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/PostListFragment.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/PostListFragment.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/ScrollDirectionListener.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/ScrollTabHolder.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/kr/hs/emirim/app2015/odazum/ScrollTabHolderFragment.java" charset="EUC-KR" />

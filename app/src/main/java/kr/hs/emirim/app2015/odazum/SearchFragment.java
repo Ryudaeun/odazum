@@ -2,8 +2,8 @@ package kr.hs.emirim.app2015.odazum;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +39,7 @@ public class SearchFragment extends Fragment {
     Button tag4;
     Button tag5;
     Button tag6;
-    
+
     EditText text_price;
 
     Button result;
@@ -48,7 +48,7 @@ public class SearchFragment extends Fragment {
     int order_by = 0;
     int age = 0;
     int price = 0;
-    int tag[] = new int[6];
+    String tag[] = new String[6];
 
     int i = 0;
 
@@ -61,7 +61,7 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
         Intent intent = getActivity().getIntent();
 
         man = (Button)view.findViewById(R.id.but_man);
@@ -74,7 +74,7 @@ public class SearchFragment extends Fragment {
         order_set(newest);
 
         text_price = (EditText)view.findViewById(R.id.text_price);
-        
+
         age1 = (ImageButton)view.findViewById(R.id.but_age_one);
         age1.setAlpha(255);
         age_set(age1);
@@ -114,31 +114,31 @@ public class SearchFragment extends Fragment {
         tag_set(tag6);
 
         for(int i=0; i<6; i++) {
-            tag[i] = 0;
+            tag[i] = null;
         }
 
         result = (Button)view.findViewById(R.id.but_result);
         result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    price = Integer.parseInt(text_price.getText().toString());
-                    //getSupportFragmentManager().beginTransaction()
-                    //    .replace(R.id.container, new ClickActivity())
-                    //    .commit();
+                price = Integer.parseInt(text_price.getText().toString());
+                getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new PostListFragment())
+                    .commit();
             }
         });
 
         return view;
     }
-    
+
     public void gender_set(Button but_gender) {
         if(but_gender == man) {
             man.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    man.setBackgroundResource(R.drawable.select);
+                    man.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
                     man.setTextColor(Color.parseColor(sel_text));
-                    woman.setBackgroundResource(R.drawable.right_deselect);
+                    woman.setBackgroundDrawable(getResources().getDrawable(R.drawable.right_deselect));
                     woman.setTextColor(Color.parseColor(desel_text));
                     gender = 0;
                 }
@@ -148,9 +148,9 @@ public class SearchFragment extends Fragment {
             woman.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    man.setBackgroundResource(R.drawable.left_deselect);
+                    man.setBackgroundDrawable(getResources().getDrawable(R.drawable.left_deselect));
                     man.setTextColor(Color.parseColor(desel_text));
-                    woman.setBackgroundResource(R.drawable.select);
+                    woman.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
                     woman.setTextColor(Color.parseColor(sel_text));
                     gender = 1;
                 }
@@ -163,9 +163,9 @@ public class SearchFragment extends Fragment {
             inquiry.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    inquiry.setBackgroundResource(R.drawable.select);
+                    inquiry.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
                     inquiry.setTextColor(Color.parseColor(sel_text));
-                    newest.setBackgroundResource(R.drawable.right_deselect);
+                    newest.setBackgroundDrawable(getResources().getDrawable(R.drawable.right_deselect));
                     newest.setTextColor(Color.parseColor(desel_text));
                     order_by = 0;
                 }
@@ -175,9 +175,9 @@ public class SearchFragment extends Fragment {
             newest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    inquiry.setBackgroundResource(R.drawable.left_deselect);
+                    inquiry.setBackgroundDrawable(getResources().getDrawable(R.drawable.left_deselect));
                     inquiry.setTextColor(Color.parseColor(desel_text));
-                    newest.setBackgroundResource(R.drawable.select);
+                    newest.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
                     newest.setTextColor(Color.parseColor(sel_text));
                     order_by = 1;
                 }
@@ -272,28 +272,29 @@ public class SearchFragment extends Fragment {
         }
     }
     private static final String TAG = "오다주움:MainFrag";
-    int flag = 0;
+    boolean flag[] = new boolean[6];
+
     public void tag_set(Button but_tag) {
+        for(int i = 0; i < 6; i++) {
+            flag[i] = false;
+        }
         if(but_tag == tag1) {
             tag1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(flag%2 != 0) {
-                        for(int i = 0 ; i < 6 ; i++) {
-                            if(tag[i] != 0 && tag[i] == 1) {
-                                tag[i] = tag[i+1];
-                            }
-                        }
-                        tag[5] = 0;
-                        tag1.setBackgroundResource(R.drawable.recommend);
+                    if(flag[0]) {
+                        if(tag[0] != null && tag[0].equals(tag1.getText().toString()))
+                            tag[0] = null;
+                        tag1.setBackgroundDrawable(getResources().getDrawable(R.drawable.recommend));
                         tag1.setTextColor(Color.parseColor(desel_text));
-                        flag++;
+                        flag[0] = false;
                     }
                     else {
-                        tag[i++] = 1;
-                        tag1.setBackgroundResource(R.drawable.select);
+                        tag[0] = tag1.getText().toString();
+                        tag1.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
                         tag1.setTextColor(Color.parseColor(sel_text));
-                        flag++;
+                        flag[0] = true;
+
                     }
                 }
             });
@@ -302,22 +303,18 @@ public class SearchFragment extends Fragment {
             tag2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(flag%2 != 0) {
-                        for(int i = 0 ; i < 6 ; i++) {
-                            if(tag[i] != 0 && tag[i] == 2) {
-                                tag[i] = tag[i+1];
-                            }
-                        }
-                        tag[5] = 0;
-                        tag2.setBackgroundResource(R.drawable.recommend);
+                    if(flag[1]) {
+                        if(tag[1] != null && tag[1].equals(tag2.getText().toString()))
+                            tag[1] = null;
+                        tag2.setBackgroundDrawable(getResources().getDrawable(R.drawable.recommend));
                         tag2.setTextColor(Color.parseColor(desel_text));
-                        flag++;
+                        flag[1] = false;
                     }
                     else {
-                        tag[i++] = 2;
-                        tag2.setBackgroundResource(R.drawable.select);
+                        tag[1] = tag2.getText().toString();
+                        tag2.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
                         tag2.setTextColor(Color.parseColor(sel_text));
-                        flag++;
+                        flag[1] = true;
                     }
                 }
             });
@@ -326,22 +323,18 @@ public class SearchFragment extends Fragment {
             tag3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(flag%2 != 0) {
-                        for(int i = 0 ; i < 6 ; i++) {
-                            if(tag[i] != 0 && tag[i] == 3) {
-                                tag[i] = tag[i+1];
-                            }
-                        }
-                        tag[5] = 0;
-                        tag3.setBackgroundResource(R.drawable.recommend);
+                    if(flag[2]) {
+                        if(tag[2] != null && tag[2].equals(tag3.getText().toString()))
+                            tag[2] = null;
+                        tag3.setBackgroundDrawable(getResources().getDrawable(R.drawable.recommend));
                         tag3.setTextColor(Color.parseColor(desel_text));
-                        flag++;
+                        flag[2] = false;
                     }
                     else {
-                        tag[i++] = 3;
-                        tag3.setBackgroundResource(R.drawable.select);
+                        tag[2] = tag3.getText().toString();
+                        tag3.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
                         tag3.setTextColor(Color.parseColor(sel_text));
-                        flag++;
+                        flag[2] = true;
                     }
                 }
             });
@@ -350,22 +343,18 @@ public class SearchFragment extends Fragment {
             tag4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(flag%2 != 0) {
-                        for(int i = 0 ; i < 6 ; i++) {
-                            if(tag[i] != 0 && tag[i] == 4) {
-                                tag[i] = tag[i+1];
-                            }
-                        }
-                        tag[5] = 0;
-                        tag4.setBackgroundResource(R.drawable.recommend);
+                    if(flag[3]) {
+                        if(tag[3] != null && tag[3].equals(tag4.getText().toString()))
+                            tag[3]= null;
+                        tag4.setBackgroundDrawable(getResources().getDrawable(R.drawable.recommend));
                         tag4.setTextColor(Color.parseColor(desel_text));
-                        flag++;
+                        flag[3] = false;
                     }
                     else {
-                        tag[i++] = 4;
-                        tag4.setBackgroundResource(R.drawable.select);
+                        tag[3] = tag4.getText().toString();
+                        tag4.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
                         tag4.setTextColor(Color.parseColor(sel_text));
-                        flag++;
+                        flag[3] = true;
                     }
                 }
             });
@@ -373,23 +362,19 @@ public class SearchFragment extends Fragment {
         else if(but_tag == tag5) {
             tag5.setOnClickListener(new View.OnClickListener() {
                 @Override
-                    public void onClick(View v) {
-                    if(flag%2 != 0) {
-                        for(int i = 0 ; i < 6 ; i++) {
-                            if(tag[i] != 0 && tag[i] == 5) {
-                                tag[i] = tag[i+1];
-                            }
-                        }
-                        tag[5] = 0;
-                        tag5.setBackgroundResource(R.drawable.recommend);
+                public void onClick(View v) {
+                    if(flag[4]) {
+                        if (tag[4] != null && tag[4].equals(tag5.getText().toString()))
+                            tag[4] = null;
+                        tag5.setBackgroundDrawable(getResources().getDrawable(R.drawable.recommend));
                         tag5.setTextColor(Color.parseColor(desel_text));
-                        flag++;
+                        flag[4] = false;
                     }
                     else {
-                        tag[i++] = 5;
-                        tag5.setBackgroundResource(R.drawable.select);
+                        tag[4] = tag5.getText().toString();
+                        tag5.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
                         tag5.setTextColor(Color.parseColor(sel_text));
-                        flag++;
+                        flag[4] = true;
                     }
                 }
             });
@@ -398,25 +383,25 @@ public class SearchFragment extends Fragment {
             tag6.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(flag%2 != 0) {
-                        for(int i = 0 ; i < 6 ; i++) {
-                            if(tag[i] != 0 && tag[i] == 6) {
-                                tag[i] = tag[i+1];   
-                            }
-                        }
-                        tag[5] = 0;
-                        tag6.setBackgroundResource(R.drawable.recommend);
+                    if(flag[5]) {
+                        if(tag[5] != null && tag[5].equals(tag6.getText().toString()))
+                            tag[5] = null;
+                        tag6.setBackgroundDrawable(getResources().getDrawable(R.drawable.recommend));
                         tag6.setTextColor(Color.parseColor(desel_text));
-                        flag++;
+                        flag[5] = false;
                     }
                     else {
-                        tag[i++] = 6;
-                        tag6.setBackgroundResource(R.drawable.select);
+                        tag[5] = tag6.getText().toString();
+                        tag6.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
                         tag6.setTextColor(Color.parseColor(sel_text));
-                        flag++;
+                        flag[5] = true;
                     }
                 }
             });
         }
     }
 }
+
+
+
+

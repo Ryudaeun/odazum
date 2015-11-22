@@ -56,24 +56,20 @@ public class PostListAdapter extends BaseAdapter {
             tmpLL = (LinearLayout) convertView;
         }
         //ImageButton btnig=(ImageButton)tmpLL.findViewById(R.id.btn_send);
-        TextView tmpTV = (TextView) tmpLL.findViewById(R.id.wish_title);
+        TextView tmpTV = (TextView) tmpLL.findViewById(R.id.post_title);
         mPost = mPosts.get(position);
         Log.d(TAG, "아이템 생성 : " + mPost.toString());
         tmpTV.setText(mPost.getTitle());
 
-        ImageView tmpIV = (ImageView) tmpLL.findViewById(R.id.wish_image);
+        ImageView tmpIV = (ImageView) tmpLL.findViewById(R.id.post_image);
         Glide.with(mContext)
                 .load(mPost.getImage())
                 .crossFade()
-                .centerCrop()
                 .override(250, 250)
                 .into(tmpIV);
 
         // 글라이드 소스가 들어갈 부분
         // https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-xpf1/v/t1.0-9/12241701_961036407322267_2265052574018231303_n.jpg?oh=46d4204fe1a6aa2dc2941095c3519008&oe=56F0C60E&__gda__=1454770788_07a23b747fc0b07812e745de85149808
-
-        TextView tmpTV2 = (TextView) tmpLL.findViewById(R.id.wish_date);
-        tmpTV2.setText(mPost.getDate());
 
         return tmpLL;
     }

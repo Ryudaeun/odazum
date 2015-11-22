@@ -15,8 +15,10 @@
             >
             <ImageView
                 android:layout_width="740dp"
-                android:layout_height="300dp"
-                android:src="@drawable/rectangle"/>
+                android:layout_height="230dp"
+                android:src="@drawable/rectangle"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -24,11 +26,12 @@
                 android:layout_marginLeft="6dp">
                 <ImageView
                     android:id="@+id/wish_image"
-                    android:layout_width="250dp"
-                    android:layout_height="250dp"/>
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"/>
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="250dp"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft="5dp"
                     android:src="@drawable/line_vertical"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -41,26 +44,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
-                        android:text="게시물 제목"
-                        android:textSize="25dp"/>
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-                        <ImageView
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="10dp"
-                            android:src="@drawable/price_box"/>
-                        <TextView
-                            android:id="@+id/wish_date"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:textColor="#ba1f24"
-                            android:textSize="15dp"/>
-                    </FrameLayout>
+                        android:textColor="#8d8d8d"
+                        android:textSize="20sp"/>
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>

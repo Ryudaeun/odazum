@@ -136,16 +136,6 @@ public class SocialActivity extends AppCompatActivity implements ObservableScrol
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        //mSocialStreamMenuItem = menu.findItem(R.id.menu_social_stream);
-        //mShareMenuItem = menu.findItem(R.id.menu_share);
-        //tryExecuteDeferredUiOperations();
-        return true;
-    }
-
-    @Override
     public void onScrollChanged(int deltaX, int deltaY) {
 
         // Reposition the header bar -- it's normally anchored to the top of the content,
