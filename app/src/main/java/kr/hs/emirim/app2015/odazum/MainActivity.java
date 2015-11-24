@@ -3,6 +3,7 @@ package kr.hs.emirim.app2015.odazum;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -27,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -61,6 +63,9 @@ public class MainActivity extends AppCompatActivity
     private Uri mImageCaptureUri;
     ImageButton cover;
     ImageButton but_main;
+    ImageButton but_search;
+    EditText text_search;
+    String search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,32 +117,17 @@ public class MainActivity extends AppCompatActivity
         //ViewPager에 Adapter 설정
         pager.setAdapter(adapter);
 
-
-
         cover = (ImageButton)findViewById(R.id.profile_cover_image);
         cover.setOnClickListener(this);
 
         but_main = (ImageButton)findViewById(R.id.but_main);
         but_main.setOnClickListener(this);
 
-        /*
-        myDB = new DB(this);
-        myDB.open();
-        Cursor all_cursor = myDB.AllRows();
-        all_cursor.moveToFirst();
-        if (all_cursor.getCount() == 0) {
-            Log.d("TEST", "아무것도없다.");
-            return;
-        } else {
-            profile_name=(TextView)findViewById(R.id.profile_name_text);
-            profile_name.setText(all_cursor.getString(all_cursor.getColumnIndex("name")));
+        but_search = (ImageButton)findViewById(R.id.but_search);
+        but_search.setOnClickListener(this);
 
-            profile_birth=(TextView)findViewById(R.id.profile_birth);
-            profile_birth.setText( all_cursor.getString(all_cursor.getColumnIndex("birth")));
-
-        }
-        */
-
+        text_search = (EditText)findViewById(R.id.text_search);
+        search = text_search.getText().toString();
 
 
     }
@@ -459,7 +449,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
-
+    private static final String TAG = "오다주움:MainActivity";
     @Override
     public void onClick(View v)
     {
@@ -506,6 +496,15 @@ public class MainActivity extends AppCompatActivity
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);*/
                 break;
+            case R.id.but_search:
+                Log.d(TAG, "검색 버튼 클릭");
+                SharedPreferences prefs = getSharedPreferences("odazum", MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("search_text", search);
+                editor.commit();
+                getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new SearchPostListFragment())
+                    .commit();
         }
     }
 

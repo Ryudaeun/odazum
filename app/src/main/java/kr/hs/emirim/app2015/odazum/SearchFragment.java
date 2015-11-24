@@ -68,7 +68,7 @@ public class SearchFragment extends Fragment {
     int gender = 0;
     int order_by = 0;
     int age = 0;
-    int price = 0;
+    //int price = 0;
 
     String tag[] = new String[6];
 
@@ -87,6 +87,7 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+        Log.v("minn", "SearchFragment");
 
         //------------------------------------------------------------
         SharedPreferences prefs = getActivity().getSharedPreferences("odazum", Context.MODE_PRIVATE);
@@ -182,7 +183,7 @@ public class SearchFragment extends Fragment {
                 SharedPreferences prefs = getActivity().getSharedPreferences("odazum", getActivity().MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putInt("gender", gender);
-                editor.putInt("age", age*10);
+                editor.putInt("age", age);
                 editor.putInt("orderby", order_by);
                 editor.putInt("max_price", Integer.parseInt(text_price.getText().toString()));
                 String tags = tag.toString();
@@ -206,7 +207,7 @@ public class SearchFragment extends Fragment {
                     man.setTextColor(Color.parseColor(sel_text));
                     woman.setBackgroundDrawable(getResources().getDrawable(R.drawable.right_deselect));
                     woman.setTextColor(Color.parseColor(desel_text));
-                    gender = 0;
+                    gender = 2;
                 }
             });
         }
@@ -233,7 +234,7 @@ public class SearchFragment extends Fragment {
                     inquiry.setTextColor(Color.parseColor(sel_text));
                     newest.setBackgroundDrawable(getResources().getDrawable(R.drawable.right_deselect));
                     newest.setTextColor(Color.parseColor(desel_text));
-                    order_by = 0;
+                    order_by = 1;
                 }
             });
         }
@@ -245,7 +246,7 @@ public class SearchFragment extends Fragment {
                     inquiry.setTextColor(Color.parseColor(desel_text));
                     newest.setBackgroundDrawable(getResources().getDrawable(R.drawable.select));
                     newest.setTextColor(Color.parseColor(sel_text));
-                    order_by = 1;
+                    order_by = 2;
                 }
             });
         }

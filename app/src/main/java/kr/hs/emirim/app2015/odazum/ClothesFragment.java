@@ -1,6 +1,7 @@
 package kr.hs.emirim.app2015.odazum;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -82,8 +83,8 @@ public class ClothesFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                // change fragment
+                Intent intent = new Intent(getActivity(), ProductActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -105,12 +106,6 @@ public class ClothesFragment extends Fragment {
             @Override
             public void success(List<Post> posts, Response response) {
                 mPosts = posts;
-                /*
-                // TODO 임시로 넣은 코드
-                for (int i = 0; i < 29; i++) {
-                    mPosts.add(posts.get(0));
-                }
-                */
                 adapter = new PostListAdapter(getActivity().getApplicationContext(), posts);
                 gridView.setAdapter(adapter);
                 for (int i = 0; i < posts.size(); i++) {

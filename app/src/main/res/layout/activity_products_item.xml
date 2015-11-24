@@ -14,59 +14,27 @@
         android:id="@+id/detail_pager"
         android:layout_width="fill_parent"
         android:layout_height="400dp"
-        android:layout_weight="8"
+        android:layout_weight="9"
         >
-
     </android.support.v4.view.ViewPager>
 
 
-    <!--<ImageView-->
-    <!--android:src="@drawable/pink_wallet"-->
-    <!--android:id="@+id/imageView"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="7"-->
-    <!--/>-->
-
-    <!--<TextView-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="1"-->
-    <!--android:textSize="30dp"-->
-    <!--android:textColor="#ff000000"-->
-    <!--android:textStyle="bold"-->
-    <!--android:id="@+id/post_title"-->
-    <!--android:layout_marginLeft="20sp"-->
-    <!--/>-->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginLeft="20sp"
-        android:gravity="center"
-        android:text=" 최저 22,000~ "
-        android:textSize="25dp"
-        android:textColor="#ba1f24"
-        android:id="@+id/price"
-        android:background="@drawable/border"
-        />
-
     <LinearLayout
-        android:layout_marginTop="20sp"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:weightSum="2"
         android:background="#ba1f24"
         >
         <ImageButton
             android:id="@+id/like_btn"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:scaleType="fitXY"
+            android:scaleType="centerInside"
             android:src="@drawable/heart_btn"
             android:layout_gravity="center"
-            android:layout_marginLeft="200sp"
+            android:layout_weight="1"
             android:background="@android:color/transparent"
             />
 
@@ -74,13 +42,12 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:id="@+id/link_btn"
-            android:scaleType="fitXY"
+            android:scaleType="centerInside"
             android:layout_gravity="center"
-            android:layout_marginLeft="240sp"
+            android:layout_weight="1"
             android:background="@android:color/transparent"
             android:src="@drawable/link_btn"
             />
 
     </LinearLayout>
-
 </LinearLayout>

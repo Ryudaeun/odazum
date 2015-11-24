@@ -44,8 +44,42 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
+                        android:text="title"
                         android:textColor="#8d8d8d"
                         android:textSize="20sp"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="bottom"
+                            android:src="@drawable/ic_drawer_click"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="250"
+                            android:layout_gravity="bottom"
+                            android:textSize="20sp"
+                            android:textColor="#8d8d8d"/>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:scaleType="centerInside"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="30dp"
+                            android:src="@drawable/ic_action_favorite"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="48"
+                            android:layout_gravity="bottom"
+                            android:textSize="20sp"
+                            android:textColor="#8d8d8d"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>

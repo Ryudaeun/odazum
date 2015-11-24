@@ -1,16 +1,17 @@
 package kr.hs.emirim.app2015.odazum;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -26,36 +27,57 @@ import retrofit.RetrofitError;
 import retrofit.client.OkClient;
 import retrofit.client.Response;
 import retrofit.converter.GsonConverter;
-import retrofit.http.Path;
 
 /**
- * A placeholder fragment containing a simple view.
+ * Created by Student on 2015-11-20.
  */
-public class ProductFragment extends Fragment {
+public class ProductActivity extends AppCompatActivity{
 
-    private static final String TAG = "오다주움:ProductListF";
+    private static final String TAG = "오다주움:PostListF";
+    ViewPager item_pager;
     RestAdapter restAdapter;
+    ProductAdapter adapter;
     int mPosition;
+    int mPostId;
+    Post mPost;
+    List<Post> mPosts;
     Product mProduct;
     List<Product> mProducts;
-    ProductAdapter adapter;
-    ViewPager pager;
+    String str = null;
 
-    public ProductFragment() {
+    public ProductActivity() {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_products_item);
 
-        View view = inflater.inflate(R.layout.fragment_products, container, false);
+        item_pager = (ViewPager)findViewById(R.id.detail_pager);
+        mPosition = item_pager.getCurrentItem();
 
-        pager= (ViewPager)view.findViewById(R.id.pager);
+        ImageButton imageButton = (ImageButton)findViewById(R.id.like_btn);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences prefs = getSharedPreferences("odazum", Context.MODE_PRIVATE);
+                mPostId = prefs.getInt("post_id", mPost.getId());
+                SharedPreferences.Editor ed = prefs.edit();
+                ed.putString("wish_item_list", String.valueOf(mPostId));
+                Toast.makeText(ProductActivity.this, R.string.save_wishlist, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ImageButton imageButton1 = (ImageButton)findViewById(R.id.link_btn);
+        imageButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.shopping.naver.com/search/all_search.nhn?query="+str+"&cat_id=&frm=NVSHATC&nlu=true")));
+            }
+        });
 
         //------------------------------------------------------------
-        SharedPreferences prefs = getActivity().getSharedPreferences("odazum", Context.MODE_PRIVATE);
-        //m_user_id = prefs.getInt("user_id", 0);
-        //m_isGrand = prefs.getBoolean("isGrand", false);
+
 
         /**
          * Gson 컨버터 이용
@@ -78,10 +100,7 @@ public class ProductFragment extends Fragment {
                         //Gson Converter 설정
                 .setConverter(new GsonConverter(gson))
                 .build();
-        //------------------------------------------------------------
 
-
-        return view;
     }
 
     @Override
@@ -94,33 +113,22 @@ public class ProductFragment extends Fragment {
         /**
          * 통신 콜백 메서드 Callback<List<Address>> callback
          */
-        Log.i(TAG, "위시리스트 가져오기");
-
-
-        restAdapter.create(OdazumService.class).products(1, new Callback<List<Product>>() {
+        Log.i(TAG, "상품 가져오기");
+        restAdapter.create(OdazumService.class).products(mPostId, new Callback<List<Product>>() {
             @Override
             public void success(List<Product> products, Response response) {
                 mProducts = products;
-
-
-                //ViewPager에 설정할 Adapter 객체 생성
-                //ListView에서 사용하는 Adapter와 같은 역할.
-                //다만. ViewPager로 스크롤 될 수 있도록 되어 있다는 것이 다름
-                //PagerAdapter를 상속받은 CustomAdapter 객체 생성
-                //CustomAdapter에게 LayoutInflater 객체 전달
-                adapter= new ProductAdapter(getActivity(), mProducts);
-
-                //ViewPager에 Adapter 설정
-                pager.setAdapter(adapter);
-
+                adapter = new ProductAdapter(ProductActivity.this, products);
+                item_pager.setAdapter(adapter);
                 for (int i = 0; i < products.size(); i++) {
-                    Log.d(TAG, "데이터는 " + products.get(i).getName());
+                    Log.d(TAG, "데이터는 " + products.get(i).getId());
                 }
+                str = products.get(mPosition).getName();
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Log.i(TAG, "product 가져오기 에러 ");
+                Log.i(TAG, "상품 가져오기 에러 ");
             }
         });
     }
@@ -141,5 +149,4 @@ public class ProductFragment extends Fragment {
                 }
             });
     }*/
-
 }

@@ -22,7 +22,6 @@ public class WishListAdapter extends BaseAdapter {
 
     private static String TAG="오다주움:WishListAdapter";
     private Post mPost;
-    MediaPlayer player;
     private Context mContext;
     private List<Post> mPosts;
     public WishListAdapter(Context aContext, List<Post> aPosts) {
@@ -80,24 +79,4 @@ public class WishListAdapter extends BaseAdapter {
         return tmpLL;
     }
 
-//
-//
-//    private void playAudio(String url) throws Exception{
-//        killMediaPlayer();
-//
-//        player = new MediaPlayer();
-//        player.setDataSource(url);
-//        player.prepare();
-//        player.start();
-//    }
-//    private void killMediaPlayer() {
-//        if(player != null){
-//            try {
-//                player.release();
-//            } catch(Exception e){
-//                e.printStackTrace();
-//            }
-//        }
-//
-//    }
 }

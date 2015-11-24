@@ -3,6 +3,8 @@ package kr.hs.emirim.app2015.odazum;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -36,6 +38,7 @@ public class SearchPostListFragment extends Fragment {
     RestAdapter restAdapter;
     GridView gridView;
     int mPosition;
+    int mPostId;
     Post mPost;
     List<Post> mPosts;
     PostListAdapter adapter;
@@ -51,8 +54,8 @@ public class SearchPostListFragment extends Fragment {
 
         //------------------------------------------------------------
         SharedPreferences prefs = getActivity().getSharedPreferences("odazum", Context.MODE_PRIVATE);
-        //m_user_id = prefs.getInt("user_id", 0);
-        //m_isGrand = prefs.getBoolean("isGrand", false);
+        SharedPreferences.Editor ed = prefs.edit();
+        ed.putInt("post_id", mPostId);
 
         /**
          * Gson ??? ??
@@ -83,8 +86,9 @@ public class SearchPostListFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ItemDetail.class);
+                Intent intent = new Intent(getActivity(), ProductActivity.class);
                 startActivity(intent);
+                mPosition = position;
             }
         });
 
@@ -106,15 +110,12 @@ public class SearchPostListFragment extends Fragment {
             @Override
             public void success(List<Post> posts, Response response) {
                 mPosts = posts;
-                // TODO ??? ?? ??
-                for (int i = 0; i < 29; i++) {
-                    mPosts.add(posts.get(0));
-                }
                 adapter = new PostListAdapter(getActivity().getApplicationContext(), posts);
                 gridView.setAdapter(adapter);
                 for (int i = 0; i < posts.size(); i++) {
                     Log.d(TAG, "???? " + posts.get(i).getTitle());
                 }
+                mPostId = posts.get(mPosition).getId();
             }
 
             @Override

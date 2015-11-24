@@ -84,4 +84,10 @@ public interface OdazumService {
             @Part("orderby") int orderby,
             Callback<List<Post>> callback
     );
+
+    @POST("/post/products")
+    void postclicks(
+            @Part("post_id") int post_id,
+            Callback<List<Product>> callback
+    );
 }

@@ -115,8 +115,8 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_my_date_picker">MyDatePicker</string>
     <string name="title_activity_camera_crop">CameraCropActivity</string>
-    <string name="exit">나가기</string>
-    <string name="exit2">ㅂㅂ</string>
+    <string name="exit">종료</string>
+    <string name="exit2">정말 종료하시겠습니까? 종료 ㄴㄴ</string>
     <string name="title_activity_dbmanager">DBManager</string>
     <string name="title_activity_dbmanager_handler">DBManagerHandler</string>
     <string name="title_activity_db">DB</string>
