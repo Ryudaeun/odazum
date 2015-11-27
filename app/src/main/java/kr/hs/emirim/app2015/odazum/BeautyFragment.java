@@ -84,6 +84,7 @@ public class BeautyFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), ProductActivity.class);
+                intent.putExtra("post_id", mPosts.get(position).getId());
                 startActivity(intent);
             }
         });

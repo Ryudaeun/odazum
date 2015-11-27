@@ -19,6 +19,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.internal.bind.DateTypeAdapter;
 import com.squareup.okhttp.OkHttpClient;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit.Callback;
@@ -44,6 +47,7 @@ public class ProductActivity extends AppCompatActivity{
     Product mProduct;
     List<Product> mProducts;
     String str = null;
+    static boolean bool = false;
 
     public ProductActivity() {
     }
@@ -54,17 +58,69 @@ public class ProductActivity extends AppCompatActivity{
         setContentView(R.layout.activity_products_item);
 
         item_pager = (ViewPager)findViewById(R.id.detail_pager);
-        mPosition = item_pager.getCurrentItem();
+
+        Log.d(TAG, ""+mPosition);
 
         ImageButton imageButton = (ImageButton)findViewById(R.id.like_btn);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences prefs = getSharedPreferences("odazum", Context.MODE_PRIVATE);
-                mPostId = prefs.getInt("post_id", mPost.getId());
+                String current_wish_id_list = prefs.getString("wish_id_list", "");
+                Log.d(TAG, "read current wish list : " + current_wish_id_list);
+
+                ArrayList<String> tmpWishIdLists = new ArrayList<String>();
+                String wish_array[] = current_wish_id_list.split(",");
+
+                for(int i = 0; i < wish_array.length; i ++){
+                    tmpWishIdLists.add(wish_array[i]);
+                }
+
+                Log.d(TAG, "now current post id : " +  mPostId);
+                Log.d(TAG, tmpWishIdLists.toString());
+
+                if(tmpWishIdLists.contains(""+mPostId)) {
+                    for (int i = 0; i < wish_array.length; i++) {
+                        if (tmpWishIdLists.get(i).equals("" + mPostId)) {
+                            tmpWishIdLists.remove(i);
+                            break;
+                        }
+                    }
+                }else{
+                    tmpWishIdLists.add("" + mPostId);
+                }
+
+                Log.d(TAG, "tmpWishIdLists's size " + tmpWishIdLists.size());
+
+                current_wish_id_list = "";
+                for(int i = 0; i < tmpWishIdLists.size(); i ++) {
+                    if (i == 0)
+                        current_wish_id_list = tmpWishIdLists.get(0);
+                    else
+                        current_wish_id_list += "," + tmpWishIdLists.get(i);
+                }
+                if(bool == false)
+                    Log.d(TAG, "current_wish_id_list is " + current_wish_id_list.substring(1));
+                else
+                    Log.d(TAG, "current_wish_id_list is " + current_wish_id_list);
+                // 1. 현재 위시를 가져와서
+                // 2. 인트의 리스트 형태 로 변환
+                // 3. 현재 아이디 있는지 찾아서 있으면 삭제, 없으면 추가
+                // 4. 리스트를 스트링 형태로 변환  1,2,3
                 SharedPreferences.Editor ed = prefs.edit();
-                ed.putString("wish_item_list", String.valueOf(mPostId));
-                Toast.makeText(ProductActivity.this, R.string.save_wishlist, Toast.LENGTH_SHORT).show();
+                if(bool == false) {
+                    ed.putString("wish_id_list", current_wish_id_list.substring(1));
+                    bool = true;
+                }
+                else
+                    ed.putString("wish_id_list", current_wish_id_list);
+                if(tmpWishIdLists.size() == 0 && bool == true)
+                    bool = false;
+                if(tmpWishIdLists.contains(""+mPostId))
+                    Toast.makeText(ProductActivity.this, R.string.save_wishlist, Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(ProductActivity.this, R.string.delete_wishlist, Toast.LENGTH_SHORT).show();
+                ed.commit();
             }
         });
 
@@ -72,6 +128,8 @@ public class ProductActivity extends AppCompatActivity{
         imageButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mPosition = item_pager.getCurrentItem();
+                str = mProducts.get(mPosition).getName();
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.shopping.naver.com/search/all_search.nhn?query="+str+"&cat_id=&frm=NVSHATC&nlu=true")));
             }
         });
@@ -106,6 +164,8 @@ public class ProductActivity extends AppCompatActivity{
     @Override
     public void onResume() {
         super.onResume();
+        Intent intent = getIntent();
+        mPostId = intent.getIntExtra("post_id", -1);
         getData();
     }
 
@@ -123,7 +183,6 @@ public class ProductActivity extends AppCompatActivity{
                 for (int i = 0; i < products.size(); i++) {
                     Log.d(TAG, "데이터는 " + products.get(i).getId());
                 }
-                str = products.get(mPosition).getName();
             }
 
             @Override
@@ -133,20 +192,4 @@ public class ProductActivity extends AppCompatActivity{
         });
     }
 
-    /*
-    private void addDate(Post post) {
-        Log.d(TAG, "추가되는 게시글" + post.getTitle());
-        restAdapter.create(OdazumService.class).
-            createPost(id, post.getTitle(), post.getDate(), post.getImage(), post.getClick(), post.getWish(), new Callback<Post>() {
-                public void success(Post post, Response response) {
-                    Log.d(TAG, "Post 추가하기");
-                    Log.d(TAG, post.toString());
-                    getData();
-                }
-
-                public void failure(RetrofitError error) {
-                    Log.d(TAG, "Post 추가하기 에러!" + error.getMessage());
-                }
-            });
-    }*/
 }

@@ -78,7 +78,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         SharedPreferences prefs = getSharedPreferences("odazum", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("name", editName.getText().toString());
+        if(editName.getText().toString().equals(""))
+            editor.putString("name", "이름 없음");
+        else
+            editor.putString("name", editName.getText().toString());
         editor.putString("birthday", but_birth.getText().toString());
         editor.putBoolean("islogined", true);
 

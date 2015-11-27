@@ -73,25 +73,4 @@ public class PostListAdapter extends BaseAdapter {
 
         return tmpLL;
     }
-
-//
-//
-//    private void playAudio(String url) throws Exception{
-//        killMediaPlayer();
-//
-//        player = new MediaPlayer();
-//        player.setDataSource(url);
-//        player.prepare();
-//        player.start();
-//    }
-//    private void killMediaPlayer() {
-//        if(player != null){
-//            try {
-//                player.release();
-//            } catch(Exception e){
-//                e.printStackTrace();
-//            }
-//        }
-//
-//    }
 }

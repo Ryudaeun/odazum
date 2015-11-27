@@ -28,7 +28,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity
     ImageButton but_main;
     ImageButton but_search;
     EditText text_search;
-    String search;
+    //String search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,15 +106,9 @@ public class MainActivity extends AppCompatActivity
         drawer_layout.setDrawerListener(mDrawerToggle);
 
 
-        pager= (ViewPager)findViewById(R.id.pager);
-        //ViewPager에 설정할 Adapter 객체 생성
-        //ListView에서 사용하는 Adapter와 같은 역할.
-        //다만. ViewPager로 스크롤 될 수 있도록 되어 있다는 것이 다름
-        //PagerAdapter를 상속받은 CustomAdapter 객체 생성
-        //CustomAdapter에게 LayoutInflater 객체 전달
-        CustomAdapter adapter= new CustomAdapter(getLayoutInflater());
-        //ViewPager에 Adapter 설정
-        pager.setAdapter(adapter);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new MainFragment())
+                .commit();
 
         cover = (ImageButton)findViewById(R.id.profile_cover_image);
         cover.setOnClickListener(this);
@@ -127,9 +120,7 @@ public class MainActivity extends AppCompatActivity
         but_search.setOnClickListener(this);
 
         text_search = (EditText)findViewById(R.id.text_search);
-        search = text_search.getText().toString();
-
-
+        //search = text_search.getText().toString();
     }
 
     @Override
@@ -144,7 +135,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case NavigationDrawFragment.NAVDRAWER_ITEM_SETTING:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, new SettingActivity())
+                        .replace(R.id.container, new SettingFragment())
                         .commit();
                 onSectionAttached(2);
                 break;
@@ -295,16 +286,9 @@ public class MainActivity extends AppCompatActivity
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
+
         private static final String ARG_SECTION_NUMBER = "section_number";
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
@@ -319,13 +303,13 @@ public class MainActivity extends AppCompatActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = null;
-            if(MyApplication.isLollipop()) {
+            View rootView = inflater.inflate(R.layout.fragment_main2, container, false);
+           /* if(MyApplication.isLollipop()) {
                 rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
             }else{
                 rootView = inflater.inflate(R.layout.fragment_main_pre, container, false);
-            }
+            }*/
 
             return rootView;
         }
@@ -335,23 +319,6 @@ public class MainActivity extends AppCompatActivity
             super.onAttach(activity);
             /*((MainActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));*/
-        }
-    }
-
-    public void PagerClick(View view){
-        EditText et = (EditText)findViewById(R.id.text_search);
-
-        switch (pager.getCurrentItem()){
-            case 0:
-                et.append("0");
-                break;
-            case 1:
-                et.append("1");
-                break;
-            case 2:
-                et.append("2");
-                break;
-            default:
         }
     }
 
@@ -488,7 +455,7 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.but_main:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container,new PlaceholderFragment())
+                        .replace(R.id.container,new MainFragment())
                         .commit();
                 onSectionAttached(0);
                 /*
@@ -497,13 +464,17 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);*/
                 break;
             case R.id.but_search:
-                Log.d(TAG, "검색 버튼 클릭");
+                Log.d(TAG, "검색 버튼 클릭");Log.d(TAG, text_search.getText().toString());
                 SharedPreferences prefs = getSharedPreferences("odazum", MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("search_text", search);
+                if(text_search.getText().toString().equals(""))
+                    editor.putString("word", "");
+                else
+                    editor.putString("word", text_search.getText().toString());
                 editor.commit();
+
                 getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new SearchPostListFragment())
+                    .replace(R.id.container, new SearchbarPostListFragment())
                     .commit();
         }
     }

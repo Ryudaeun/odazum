@@ -31,6 +31,16 @@ public interface OdazumService {
     @POST("/wishitems")
     void wishposts(
             @Part("wish_id_list") String wish_id_list,
+            @Part("click") int click,
+            @Part("wish") int wish,
+            //click, wish
+            Callback<List<Post>> callback
+    );
+
+    @Multipart
+    @POST("/easysearch")
+    void easysearch(
+            @Part("word") String word,
             Callback<List<Post>> callback
     );
 
@@ -80,14 +90,14 @@ public interface OdazumService {
             @Part("gender") int gender,
             @Part("age") int age,
             @Part("tags") String tags,
-            @Part("max_price") int max_price,
+            @Part("maxprice") int max_price,
             @Part("orderby") int orderby,
             Callback<List<Post>> callback
     );
 
-    @POST("/post/products")
+    /*@POST("/post/{post_id}/products")
     void postclicks(
             @Part("post_id") int post_id,
             Callback<List<Product>> callback
-    );
+    );*/
 }

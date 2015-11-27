@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -41,51 +43,34 @@ public class ProductAdapter extends PagerAdapter {
         return mProducts.size();
     }
 
-    public View getView(final int position, final View convertView, ViewGroup parent) {
-        LinearLayout tmpLL;
-        Log.d(TAG, "getView호출");
-        if(convertView==null)
-        {
-            tmpLL=(LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.activity_products, parent,false);
-        }
-        else
-        {
-            tmpLL=(LinearLayout)convertView;
-        }
-
-        View view=inflater.inflate(R.layout.activity_products_item, null);
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        View view=inflater.inflate(R.layout.viewpager, null);
 
         mProduct = mProducts.get(position);
+        Log.d(TAG, mProduct.toString());
 
         ImageView img= (ImageView)view.findViewById(R.id.pager_img);
+        TextView name = (TextView)view.findViewById(R.id.pager_name);
         TextView txt = (TextView)view.findViewById(R.id.pager_txt);
         TextView price = (TextView)view.findViewById(R.id.pager_price);
 
-        Log.d(TAG, "아이템 생성 : " + mProduct.toString());
-        txt.setText(mProduct.getName());
-
+        name.setText(mProduct.getName());
+        txt.setText(mProduct.getText());
+        price.setText(" 최저 ~" + mProduct.getPrice() + "원 ");
         Glide.with(mContext)
                 .load(mProduct.getImage())
                 .crossFade()
-                .centerCrop()
                 .override(800, 800)
                 .into(img);
 
-        // 글라이드 소스가 들어갈 부분
-        // https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-xpf1/v/t1.0-9/12241701_961036407322267_2265052574018231303_n.jpg?oh=46d4204fe1a6aa2dc2941095c3519008&oe=56F0C60E&__gda__=1454770788_07a23b747fc0b07812e745de85149808
+        container.addView(view);
 
-        //TextView tmpTV2=(TextView)tmpLL.findViewById(R.id.wish_date);
-        //tmpTV2.setText(mPost.getDate());
-
-        return tmpLL;
+        return view;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        // TODO Auto-generated method stub
-
-        //ViewPager에서 보이지 않는 View는 제거
-        //세번째 파라미터가 View 객체 이지만 데이터 타입이 Object여서 형변환 실시
         container.removeView((View)object);
 
     }
@@ -93,7 +78,6 @@ public class ProductAdapter extends PagerAdapter {
     //instantiateItem() 메소드에서 리턴된 Ojbect가 View가  맞는지 확인하는 메소드
     @Override
     public boolean isViewFromObject(View v, Object obj) {
-        // TODO Auto-generated method stub
         return v==obj;
     }
 }

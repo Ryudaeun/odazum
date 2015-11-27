@@ -22,6 +22,7 @@ import com.google.gson.internal.bind.DateTypeAdapter;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit.Callback;
@@ -68,10 +69,11 @@ public class SearchFragment extends Fragment {
     int gender = 0;
     int order_by = 0;
     int age = 0;
-    //int price = 0;
 
     String tag[] = new String[6];
-
+    String tags;
+    static int count = 0;
+    static int isTag = 0;
     int i = 0;
 
     String sel_text = "#ffffff";
@@ -129,7 +131,7 @@ public class SearchFragment extends Fragment {
         text_price = (EditText)view.findViewById(R.id.text_price);
 
         age1 = (ImageButton)view.findViewById(R.id.but_age_1);
-        age1.setAlpha(255);
+        age1.setAlpha(0);
         age_set(age1);
         age2 = (ImageButton)view.findViewById(R.id.but_age_2);
         age2.setAlpha(0);
@@ -184,10 +186,39 @@ public class SearchFragment extends Fragment {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putInt("gender", gender);
                 editor.putInt("age", age);
+
+                for(int a = 0; a < tag.length; a++) {
+                    if (tag[a] != null)
+                        isTag = 1;
+                    else
+                        continue;
+                }
+
+                if(isTag == 1) {
+                    for (int i = 0; i < tag.length; i++) {
+                        if (count == 0) {
+                            tags = tag[i];
+                            count += 1;
+                        } else {
+                            if(tag[i] == null)
+                                continue;
+                            else
+                                tags += "," + tag[i];
+                        }
+                    }
+                }
+
+                if(tags !=null)
+                    editor.putString("tags",tags.substring(5));
+               else
+                    editor.putString("tags", "");
+
+                if(text_price.getText().toString().equals(""))
+                    editor.putInt("maxprice", 0);
+                else
+                    editor.putInt("maxprice", Integer.parseInt(text_price.getText().toString()));
+
                 editor.putInt("orderby", order_by);
-                editor.putInt("max_price", Integer.parseInt(text_price.getText().toString()));
-                String tags = tag.toString();
-                editor.putString("tags", tags);
                 editor.commit();
                 getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, new SearchPostListFragment())

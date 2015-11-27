@@ -20,6 +20,18 @@ public class Product {
     @Getter @Setter
     String text;
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", image='" + image + '\'' +
+                ", p_id=" + p_id +
+                ", text='" + text + '\'' +
+                '}';
+    }
+
     public Product() {}
     public Product(int id, String name, int price, String image, int p_id, String text) {
         this.id = id;

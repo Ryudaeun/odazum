@@ -38,6 +38,9 @@ public class WishListFragment extends Fragment  {
     List<Post> mPosts;
     WishListAdapter adapter;
     String mWishItemList;
+    int s_click;
+    int s_wish;
+
 
     public WishListFragment() {
     }
@@ -49,6 +52,7 @@ public class WishListFragment extends Fragment  {
         MainActivity.mLastMenu = MainActivity.WISH;
 
         View view = inflater.inflate(R.layout.fragment_wishlist, container, false);
+
 
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -73,6 +77,7 @@ public class WishListFragment extends Fragment  {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), ProductActivity.class);
+                intent.putExtra("post_id", mPosts.get(position).getId());
                 startActivity(intent);
             }
         });
@@ -89,11 +94,13 @@ public class WishListFragment extends Fragment  {
     private void getData(){
         //------------------------------------------------------------
         SharedPreferences prefs = getActivity().getSharedPreferences("odazum", Context.MODE_PRIVATE);
-        mWishItemList = prefs.getString("wish_item_list", "1");
+        mWishItemList = prefs.getString("wish_id_list", "");
+        s_click = prefs.getInt("click", 0);
+        s_wish = prefs.getInt("wish", 0);
 
         Log.i(TAG, "위시리스트 가져오기");
         restAdapter.create(OdazumService.class)
-                .wishposts(mWishItemList, new Callback<List<Post>>() {
+                .wishposts(mWishItemList, s_click, s_wish, new Callback<List<Post>>() {
                     @Override
                     public void success(List<Post> posts, Response response) {
                         mPosts = posts;

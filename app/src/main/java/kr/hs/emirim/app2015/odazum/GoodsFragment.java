@@ -84,6 +84,7 @@ public class GoodsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), ProductActivity.class);
+                intent.putExtra("post_id", mPosts.get(position).getId());
                 startActivity(intent);
             }
         });
@@ -106,12 +107,6 @@ public class GoodsFragment extends Fragment {
             @Override
             public void success(List<Post> posts, Response response) {
                 mPosts = posts;
-                /*
-                // TODO 임시로 넣은 코드
-                for (int i = 0; i < 29; i++) {
-                    mPosts.add(posts.get(0));
-                }
-                */
                 adapter = new PostListAdapter(getActivity().getApplicationContext(), posts);
                 gridView.setAdapter(adapter);
                 for (int i = 0; i < posts.size(); i++) {

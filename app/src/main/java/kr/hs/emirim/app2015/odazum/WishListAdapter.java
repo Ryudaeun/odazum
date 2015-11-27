@@ -59,8 +59,14 @@ public class WishListAdapter extends BaseAdapter {
         //ImageButton btnig=(ImageButton)tmpLL.findViewById(R.id.btn_send);
         TextView tmpTV=(TextView)tmpLL.findViewById(R.id.wish_title);
         mPost = mPosts.get(position);
+
         Log.d(TAG, "아이템 생성 : " + mPost.toString());
+
         tmpTV.setText(mPost.getTitle());
+        TextView most_view = (TextView)tmpLL.findViewById(R.id.wish_most_view);
+        most_view.setText(""+mPost.getClick());
+        TextView most_wish = (TextView)tmpLL.findViewById(R.id.wish_most_wish);
+        most_wish.setText(""+mPost.getWish());
 
         ImageView tmpIV = (ImageView) tmpLL.findViewById(R.id.wish_image);
         Glide.with(mContext)

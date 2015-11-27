@@ -69,7 +69,7 @@ public class NavigationDrawFragment extends Fragment {
     // icons for navdrawer items (indices must correspond to above array)
     private static final int[] NAVDRAWER_ICON_RES_ID = new int[]{
             R.drawable.ic_drawer_wish,
-            R.drawable.ic_drawer_set,
+            R.drawable.ic_drawer_developers,
             R.drawable.ic_drawer_search,
             R.drawable.ic_drawer_hottest,
             R.drawable.ic_drawer_click,
@@ -118,8 +118,8 @@ public class NavigationDrawFragment extends Fragment {
         TextView tvbirth = (TextView) mRootView.findViewById(R.id.profile_birth);
 
         SharedPreferences prefs = getActivity().getSharedPreferences("odazum", getActivity().MODE_PRIVATE);
-        String name = prefs.getString("name", "무명씨");
-        String birthday = prefs.getString("birthday", "호랑이 담배먹던 날");
+        String name = prefs.getString("name", "오다주움");
+        String birthday = prefs.getString("birthday", "2015/11/27");
         tvname.setText(name);
         tvbirth.setText(birthday);
 

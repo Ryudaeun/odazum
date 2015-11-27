@@ -3,7 +3,7 @@
     <string name="action_settings">설정</string>
 
     <string name="title_section1">위시리스트</string>
-    <string name="title_section2">설정</string>
+    <string name="title_section2">개발자 정보</string>
     <string name="title_section3">맞춤검색</string>
     <string name="title_section4">인기순 Best 20</string>
     <string name="title_section5">조회순 Best 20</string>
@@ -115,8 +115,8 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_my_date_picker">MyDatePicker</string>
     <string name="title_activity_camera_crop">CameraCropActivity</string>
-    <string name="exit">종료</string>
-    <string name="exit2">정말 종료하시겠습니까? 종료 ㄴㄴ</string>
+    <string name="exit">ODAZUM 종료</string>
+    <string name="exit2">날시가 마니 추어오 감기 조시마새오 안녕히 가새오</string>
     <string name="title_activity_dbmanager">DBManager</string>
     <string name="title_activity_dbmanager_handler">DBManagerHandler</string>
     <string name="title_activity_db">DB</string>
@@ -146,5 +146,7 @@
     <string name="inquiry_page">조회순 페이지입니다.</string>
     <string name="searchbar_hint">검색어를 입력하세요</string>
     <string name="save_wishlist">보관함에 저장되었습니다.</string>
+    <string name="delete_wishlist">보관함에서 삭제되었습니다.</string>
+    <string name="search_but_click">검색하기</string>
 
 </resources>
